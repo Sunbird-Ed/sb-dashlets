@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config/config.service';
-import { DataService } from './data.service';
+import { DashletConfigService } from './config/config.service';
+import { DashletDataService } from './dashlets-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BaseReportService extends DataService {
+export class ReportService extends DashletDataService {
   /**
    * base Url for report service api
    */
@@ -14,17 +14,17 @@ export class BaseReportService extends DataService {
   /**
    * reference of config service. 
    */
-  public config: ConfigService;
+  public config: DashletConfigService;
   /**
    * reference of http client.
    */
   public http: HttpClient;
   /**
    * constructor
-   * @param {ConfigService} config ConfigService reference
+   * @param {DashletConfigService} config ConfigService reference
    * @param {HttpClient} http HttpClient reference
    */
-  constructor(config: ConfigService, http: HttpClient) {
+  constructor(config: DashletConfigService, http: HttpClient) {
     super(http);
     this.config = config;
     this.baseUrl = this.config.urlConFig.URLS.REPORT_PREFIX;

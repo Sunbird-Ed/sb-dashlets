@@ -1,32 +1,83 @@
 <div class="graph-filters" #chartRootElement>
     <form [formGroup]="filtersFormGroup" class="ui form" *ngIf="showChart && showFilters"
       [ngClass]="{'hide': hideElements}">
-      <div class="d-flex flex-w-wrap reset-filter-section">
+      <div class="d-flex reset-filter-section flex-ai-center mr-64">
         <div *ngIf="showGraphStats" class="d-flex flex-ai-center">{{resourceService?.frmelmnts?.lbl?.graphStat }}:
-          <input type="checkbox" class="toggle ml-8" appTelemetryInteract
+          <input type="checkbox" class="toggle ml-8"  
             (checkChange)="showStats = $event; "/>
         </div>
-        <div class="mr-8" *ngIf="chartType === 'bar' || chartType === 'line'">
+        <div *ngIf="chartType === 'bar' || chartType === 'line'">
           <button (click)="addChartSummary()" *ngIf="chartConfig.id && isUserReportAdmin" type="button"
-            appTelemetryInteract
+             
             class="mr-8 sb-btn sb-btn-normal sb-btn-link sb-btn-link-primary sb-left-icon-btn"><i class="add icon"></i>Add
             {{ resourceService?.frmelmnts?.lbl?.chartSummary}}</button>
-          <sui-select class="selection" [placeholder]="'Select ChartType'"
-            (selectedOptionChange)="changeChartType($event)">
-            <sui-select-option appTelemetryInteract
-              *ngFor="let option of availableChartTypeOptions" [value]="option">
-            </sui-select-option>
-          </sui-select>
+        </div>
+        <div class="reset-filter-dropdown mx-16">
+          <select class="selection"
+          (change)="changeChartType($event.target.value)">
+          <option value="Select ChartType">Select ChartType</option>
+          <option *ngFor="let option of availableChartTypeOptions" [value]="option">{{option}}</option>
+        </select>
         </div>
         <div class="field">
-          <button appTelemetryInteract
+          <button 
             class="sb-btn sb-btn-outline-primary sb-btn-normal"
             *ngIf="filters.length" (click)="resetFilter()">
             {{resourceService?.frmelmnts?.btn?.reset}} {{resourceService?.frmelmnts?.lbl?.filters  }}
           </button>
         </div>
       </div>
-      <sui-accordion class="styled fluid" [closeOthers]="false">
+      <sb-accordion [multi]="false">
+        <sb-accordion-item>
+          <sb-accordion-header>
+            <div title>
+              <i class="dropdown icon"></i>
+              {{resourceService?.frmelmnts?.lbl?.filters }}
+            </div>  
+          </sb-accordion-header>
+          <sb-accordion-body>
+            <div content>
+              <div class="sb-prominent-filter p-0">
+                <div class="sb-prominent-filter-container pt-8 pb-0">
+                  <div class="sb-prominent-filter-field" *ngFor="let filter of filters">
+                    <!-- <label>{{filter.displayName}}</label> -->
+                    <div *ngIf="filter.controlType === 'multi-select'">
+                      <select class="selection sb-select-searchfilter"
+                        [formControlName]="filter.reference" multiple>
+                        <option [value]="filter.displayName">{{filter.displayName}}</option>
+                        <option *ngFor="let option of filter.options" [value]="option">{{option}}</option>
+                      </select>
+                      <!-- <sui-multi-select [hasLabels]="false" class="selection sb-select-searchfilter"
+                        [placeholder]="filter.displayName" [formControlName]="filter.reference">
+                        <option
+                          *ngFor="let option of filter.options"
+                          [value]="option | titlecase">
+                        </option>
+                      </sui-multi-select> -->
+                    </div>
+                    <div *ngIf="filter.controlType === 'select'">
+                      <select class="selection sb-select-searchfilter"
+                        [formControlName]="filter.reference">
+                        <option value="filter.displayName">{{filter.displayName}}</option>
+                        <option *ngFor="let option of filter.options" [value]="option">{{option}}</option>
+                      </select>
+                    </div>
+                    <div *ngIf="filter.controlType === 'date'">
+                      <input  
+                        #datePickerForFilters class="form-control" type="text"
+                        [placeholder]="filter.displayName" ngxDaterangepickerMd [showCustomRangeLabel]="true"
+                        [locale]="datePickerConfig" [alwaysShowCalendars]="true" [ranges]="ranges" [linkedCalendars]="true"
+                        [minDate]="pickerMinDate" [maxDate]="pickerMaxDate"
+                        (change)="getDateRange($event,filter.reference)" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sb-accordion-body>
+        </sb-accordion-item>
+      </sb-accordion>
+      <!-- <sui-accordion class="styled fluid" [closeOthers]="false">
         <sui-accordion-panel [isOpen]="true">
           <div title>
             <i class="dropdown icon"></i>
@@ -38,24 +89,27 @@
                 <div class="sb-prominent-filter-field" *ngFor="let filter of filters">
                   <label>{{filter.displayName}}</label>
                   <div *ngIf="filter.controlType === 'multi-select'">
+                    <sb-multiple-dropdown [options]="filter.options" [placeHolder]="filter.displayName">
+                    </sb-multiple-dropdown>
                     <sui-multi-select [hasLabels]="false" class="selection sb-select-searchfilter"
                       [placeholder]="filter.displayName" [formControlName]="filter.reference">
-                      <sui-select-option appTelemetryInteract
+                      <option
                         *ngFor="let option of filter.options"
                         [value]="option | titlecase">
-                      </sui-select-option>
+                      </option>
                     </sui-multi-select>
                   </div>
                   <div *ngIf="filter.controlType === 'select'">
-                    <sui-select class="selection sb-select-searchfilter" [placeholder]="filter.displayName"
+                    <select class="selection sb-select-searchfilter"
                       [formControlName]="filter.reference">
-                      <sui-select-option appTelemetryInteract
+                      <option value="filter.displayName"></option>
+                      <option  
                         *ngFor="let option of filter.options" [value]="option">
-                      </sui-select-option>
-                    </sui-select>
+                      </option>
+                    </select>
                   </div>
                   <div *ngIf="filter.controlType === 'date'">
-                    <input appTelemetryInteract
+                    <input  
                       #datePickerForFilters class="form-control" type="text"
                       [placeholder]="filter.displayName" ngxDaterangepickerMd [showCustomRangeLabel]="true"
                       [locale]="datePickerConfig" [alwaysShowCalendars]="true" [ranges]="ranges" [linkedCalendars]="true"
@@ -67,7 +121,7 @@
             </div>
           </div>
         </sui-accordion-panel>
-      </sui-accordion>
+      </sui-accordion> -->
     </form>
     <div *ngIf="showStats">
       <div _ngcontent-c14="" class="graph-statistics py-16" *ngFor="let stat of loadash.keys(resultStatistics)">
@@ -87,7 +141,7 @@
     </div>
     <div *ngIf="!showFilters && isUserReportAdmin && chartConfig.id" [ngClass]="{'hide': hideElements}"
       class="d-flex flex-jc-flex-end  mt-8 mr-8 sb-last-update-status">
-      <button appTelemetryInteract
+      <button  
         (click)="addChartSummary()" type="button"
         class="sb-btn sb-btn-normal sb-btn-link sb-btn-link-primary sb-left-icon-btn"><i class="add icon"></i>Add
         {{ resourceService?.frmelmnts?.lbl?.chartSummary}}</button>

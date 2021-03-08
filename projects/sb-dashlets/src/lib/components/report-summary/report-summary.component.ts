@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ResourceService } from '../../service/resource.service';
-import { UsageService } from '../../service/usage.service';
+import { DashletResourceService } from '../../service/dashlets-resource.service';
+import { DashletUsageService } from '../../service/dashlets-usage.service';
 
 interface ReportSummary {
   label: string;
@@ -17,13 +17,11 @@ export class ReportSummaryComponent implements OnInit {
 
   @Input() inputData: Array<ReportSummary>;
 
-  constructor(public usageService: UsageService, public resourceService: ResourceService) {
+  constructor(public usageService: DashletUsageService, public resourceService: DashletResourceService) {
     console.log('initializer new');
   }
 
   ngOnInit() {
-    console.log('initializer');
-    this.resourceService.initialize();
   }
 
 }

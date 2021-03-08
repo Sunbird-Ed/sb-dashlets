@@ -11,12 +11,12 @@ import dayjs from 'dayjs';
 import { CacheService } from 'ng2-cache-service';
 import * as _ from 'lodash-es';
 import { TranslateService, TranslateStore } from '@ngx-translate/core';
-import { ConfigService } from './config/config.service';
+import { DashletConfigService } from './config/config.service';
 /**
  * Service to fetch resource bundle
  */
 @Injectable()
-export class ResourceService {
+export class DashletResourceService {
   // Workaround for issue https://github.com/angular/angular/issues/12889
   // Dependency injection creates new instance each time if used in router sub-modules
   /**
@@ -30,9 +30,7 @@ export class ResourceService {
   /**
    * reference of config service.
    */
-  public config: ConfigService;
   public baseUrl: string;
-  public http: HttpClient;
 
   /**
    * Contains instance name
@@ -47,26 +45,26 @@ export class ResourceService {
 
   /**
    * constructor
-   * @param {ConfigService} config ConfigService reference
-   * @param {HttpClient} http LearnerService reference
    */
-  constructor(config: ConfigService, http: HttpClient,
-    private cacheService: CacheService,
+  constructor(private config: DashletConfigService, public http: HttpClient, private cacheService: CacheService,
     private translateService: TranslateService) {
+
     if (!this) {
-      this.http = http;
-      this.config = config;
       this.baseUrl = this.config.urlConFig.URLS.RESOURCEBUNDLES_PREFIX;
       try {
         this._instance = (<HTMLInputElement>document.getElementById('instance')).value;
       } catch (error) {
       }
+    } else {
+      this.baseUrl = this.config.urlConFig.URLS.RESOURCEBUNDLES_PREFIX;
     }
     return this;
   }
   public initialize() {
     console.log('adas  dasd asdasd asd asd');
     const range = { value: 'en', label: 'English', dir: 'ltr' };
+    console.log('72');
+    
     this.getResource(this.cacheService.get('portalLanguage') || 'en', range);
     this.translateService.setDefaultLang('en');
   }
@@ -74,6 +72,7 @@ export class ResourceService {
    * method to fetch resource bundle
   */
   public getResource(language = 'en', range: any = {}): void {
+    console.log('81', this);
     const option = {
       url: this.config.urlConFig.URLS.RESOURCEBUNDLES.ENG + '/' + language
     };
@@ -97,6 +96,7 @@ export class ResourceService {
       headers: requestParam.header ? requestParam.header : this.getHeader(),
       params: requestParam.param
     };
+    console.log('Request Url', this.baseUrl);
     return this.http.get(this.baseUrl + requestParam.url, httpOptions).pipe(
       mergeMap((data: ServerResponse) => {
         if (data.responseCode !== 'OK') {

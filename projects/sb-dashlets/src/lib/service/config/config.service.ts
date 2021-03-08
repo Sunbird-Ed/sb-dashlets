@@ -12,7 +12,11 @@ import * as offlineConfig from './offline.config.json';
  *
  */
 @Injectable()
-export class ConfigService {
+export class DashletConfigService {
+
+  constructor() {
+    console.log('DashletsConfig Initialised', this);
+  }
   /**
    * property containing url config
    *

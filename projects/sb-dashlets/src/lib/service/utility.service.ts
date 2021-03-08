@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UsageService } from './usage.service';
+import { DashletUsageService } from './dashlets-usage.service';
 import _ from 'lodash-es';
 
 declare const iziToast: any;
@@ -9,11 +9,11 @@ declare const iziToast: any;
 @Injectable({
   providedIn: 'root'
 })
-export class UtilityService {
+export class DashletUtilityService {
 
   public iziToast: any;
 
-  constructor(private usageService: UsageService) {
+  constructor(private usageService: DashletUsageService) {
     this.iziToast = iziToast;
   }
 

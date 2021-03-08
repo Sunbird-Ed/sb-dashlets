@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Observable } from "rxjs";
-import { ResourceService } from "../../service/resource.service";
+import { DashletResourceService } from "../../service/dashlets-resource.service";
 
 @Component({
     selector: 'sb-graph-view',
@@ -15,11 +15,16 @@ export class GrapshViewComponent {
     @Output() openAddSummaryModal = new EventEmitter();
 
     constructor(
-        public resourceService: ResourceService
+        public resourceService: DashletResourceService
     ) {}
 
     passOnEventEmitted($event) {
         this.openAddSummaryModal.emit($event);
+    }
+
+    ngOnInit() {
+        this.report$.subscribe(console.log);
+        this.resourceService.initialize();
     }
 
 

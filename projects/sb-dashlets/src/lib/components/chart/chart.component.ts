@@ -13,19 +13,68 @@ import { Subscription, Subject, timer, of } from 'rxjs';
 import { distinctUntilChanged, map, debounceTime, takeUntil, switchMap } from 'rxjs/operators';
 import * as moment_ from 'moment';
 import { IInteractEventObject } from '../../interface/itelemetry';
-import { UsageService } from '../../service/usage.service';
-import { UtilityService } from '../../service/utility.service';
+import { DashletUsageService } from '../../service/dashlets-usage.service';
+import { DashletUtilityService } from '../../service/utility.service';
 import { IBigNumberChart } from '../../interface/common';
-import { ResourceService } from '../../service/resource.service';
+import { DashletResourceService } from '../../service/dashlets-resource.service';
+import { FieldConfig, FieldConfigInputType, FieldConfigOption, FieldConfigValidationType } from 'common-form-elements';
 
 const moment = moment_;
 
 @Component({
   selector: 'data-chart',
-  templateUrl: './data-chart.component2.html',
-  styleUrls: ['./data-chart.component2.scss']
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss']
 })
 export class DataChartComponent2 implements OnInit, OnDestroy {
+
+  public multiSelectConfig = {
+    code: "grade",
+    type: "select",
+    templateOptions: {
+      placeHolder: "Select Grade",
+      multiple: true,
+      options: [
+        {
+          label: "asdasd",
+          value: "asdasd"
+        },
+        {
+          label: "asdasd",
+          value: "asdasd"
+        }
+      ]
+    },
+    validations: [
+      {
+        type: "required"
+      }
+    ]
+  };
+
+  public multiSelectConfig2 = {
+    code: "grade",
+    type: "select",
+    templateOptions: {
+      placeHolder: "Select Grade",
+      multiple: true,
+      options: [
+        {
+          label: "asdasd",
+          value: "asdasd"
+        },
+        {
+          label: "asdasd",
+          value: "asdasd"
+        }
+      ]
+    },
+    validations: [
+      {
+        type: "required"
+      }
+    ]
+  };
 
   @Input() chartInfo: any;
   @Input() hideElements = false;
@@ -89,9 +138,11 @@ export class DataChartComponent2 implements OnInit, OnDestroy {
   };
 
   @ViewChild(BaseChartDirective, {static: false}) chartDirective: BaseChartDirective;
-  constructor(public resourceService: ResourceService, private fb: FormBuilder, private cdr: ChangeDetectorRef,
+  dataLoadStatusDelegate: Subject<"LOADING" | "LOADED"> = new Subject<'LOADING' | 'LOADED'>();
+  formConfig: any[];
+  constructor(public resourceService: DashletResourceService, private fb: FormBuilder, private cdr: ChangeDetectorRef,
     public activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer,
-    private usageService: UsageService, private utilityService: UtilityService) {
+    private usageService: DashletUsageService, private utilityService: DashletUtilityService) {
     this.alwaysShowCalendars = true;
   }
 
@@ -112,8 +163,10 @@ export class DataChartComponent2 implements OnInit, OnDestroy {
     console.log('showFilters && isUserReportAdmin && chartConfig.id', this.isUserReportAdmin);
     console.log('showFilters && isUserReportAdmin && chartConfig.id', this.chartConfig.id);
     console.log('showFilters && isUserReportAdmin && chartConfig.id', this.chartInfo);
-    console.log('ResourceService', this.resourceService);  
+    console.log('ResourceService', this.resourceService);
   }
+  
+  
 
   buildFiltersForm() {
     this.filtersFormGroup = this.fb.group({});
@@ -369,6 +422,7 @@ export class DataChartComponent2 implements OnInit, OnDestroy {
   }
 
   changeChartType(chartType) {
+    console.log("Event", chartType);
     this.chartType = _.lowerCase(chartType);
   }
 
@@ -458,6 +512,50 @@ export class DataChartComponent2 implements OnInit, OnDestroy {
     }
   }
 
+  prepFormConfig(filter) {
+    let temp = [];
+    filter.options.forEach(element => {
+      const value = {
+        label: element,
+        value: element
+      };
+      temp.push(value);
+    });
+    this.multiSelectConfig.code = filter.displayName;
+    this.multiSelectConfig.templateOptions.placeHolder = filter.displayName;
+    this.multiSelectConfig.templateOptions.options = temp;
+    console.log("formConfig2", [this.multiSelectConfig]);
+    return [this.multiSelectConfig];
+  }
+
+  valueChanged(event) {
+    console.log('Value Chnaged', event);
+    // this.formValues = $event;
+    // if (!this.formContext && $event.category === 'otherissues') {
+    //   this.formConfig[1].templateOptions.hidden = true;
+    // } else if (!this.formContext) {
+    //   this.formConfig[1].templateOptions.hidden = false;
+    // }
+  }
+
+  async dataLoadStatus(event) {
+    console.log('dataLoadStatus', event);
+    // if (!this.loader) {
+    //   this.loader = await this.commonUtilService.getLoader();
+    // }
+    // if ('LOADING' === $event) {
+    //   this.loader.present();
+    // } else {
+    //   this.loader.dismiss();
+    // }
+  }
+
+  statusChanged(event) {
+    console.log('statusChanged', event);
+  }
+
+  linkClicked(event) {
+    console.log('linkClicked', event);
+  }
+  
 }
-
-

@@ -18,7 +18,7 @@ import { HttpOptions } from '../interface/http-options';
   providedIn: 'root'
 })
 
-export class DataService {
+export class DashletDataService {
   static userId: string;
   static sessionId: string;
   /**
@@ -191,7 +191,7 @@ export class DataService {
       'X-msgid': _uuid,
       'X-Request-ID': _uuid,
       'X-App-Version': this.appVersion,
-      'X-Session-ID': DataService.sessionId
+      'X-Session-ID': DashletDataService.sessionId
     };
     try {
       this.deviceId = (<HTMLInputElement>document.getElementById('deviceId')).value;
@@ -210,8 +210,8 @@ export class DataService {
     if (this.appId) {
       default_headers['X-App-Id'] = this.appId;
     }
-    if (DataService.userId) {
-      default_headers['X-User-ID'] = DataService.userId;
+    if (DashletDataService.userId) {
+      default_headers['X-User-ID'] = DashletDataService.userId;
     }
     if (this.traceId) {
       default_headers['X-Request-ID'] = this.traceId;

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResourceService } from './resource.service';
+import { DashletDataService } from './dashlets-data.service';
 
-describe('ResourceService', () => {
+describe('DataService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ResourceService = TestBed.get(ResourceService);
+    const service: DashletDataService = TestBed.get(DashletDataService);
     expect(service).toBeTruthy();
   });
 });

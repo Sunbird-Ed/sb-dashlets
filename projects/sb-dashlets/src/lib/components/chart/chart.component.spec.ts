@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyLibComponent } from './my-lib.component';
+import { DataChartComponent2 } from './chart.component';
 
-describe('MyLibComponent', () => {
-  let component: MyLibComponent;
-  let fixture: ComponentFixture<MyLibComponent>;
+describe('DataChartComponent', () => {
+  let component: DataChartComponent2;
+  let fixture: ComponentFixture<DataChartComponent2>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyLibComponent ]
+      declarations: [ DataChartComponent2 ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyLibComponent);
+    fixture = TestBed.createComponent(DataChartComponent2);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,11 +2,23 @@
   "name": "sb-dashlets",
   "version": "1.0.0",
   "peerDependencies": {
-    "@angular/common": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "ng2-semantic-ui": "github:project-sunbird/ng2-semantic-ui"
+    "@angular/animations": "~8.2.14",
+    "@angular/cli": "^8.3.29",
+    "@angular/common": "~8.2.14",
+    "@angular/compiler": "~8.2.14",
+    "@angular/core": "~8.2.14",
+    "@angular/forms": "~8.2.14",
+    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser-dynamic": "~8.2.14",
+    "@angular/router": "~8.2.14",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
+    "@project-sunbird/sb-styles": "0.0.7",
+    "ng2-cache-service": "^1.1.1",
+    "ng2-charts": "^2.4.2",
+    "ngx-daterangepicker-material": "^4.0.1",
+    "@project-sunbird/common-consumption-v8": "^3.7.3"
   },
   "dependencies": {
-    
   }
 }

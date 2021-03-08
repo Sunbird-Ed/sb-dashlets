@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UsageService } from './usage.service';
+import { MyLibService } from './dashlets.service';
 
-describe('UsageService', () => {
+describe('MyLibService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UsageService = TestBed.get(UsageService);
+    const service: MyLibService = TestBed.get(MyLibService);
     expect(service).toBeTruthy();
   });
 });

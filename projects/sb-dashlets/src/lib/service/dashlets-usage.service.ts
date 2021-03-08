@@ -5,19 +5,19 @@ import { catchError, map } from 'rxjs/operators';
 import { get } from 'lodash-es';
 import { Observable, of } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ConfigService } from './config/config.service';
-import { BaseReportService } from './report.service';
+import { DashletConfigService } from './config/config.service';
+import { ReportService } from './dashlets-report.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsageService {
+export class DashletUsageService {
 
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private configService: ConfigService,
-    private baseReportService: BaseReportService
+    private configService: DashletConfigService,
+    private baseReportService: ReportService
     ) { }
 
   getData(url: string, requestParam?: { params: any; }) {

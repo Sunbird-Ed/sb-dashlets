@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-my-lib',
+  selector: 'sb-dashlets',
   template: `
     <p>
-      my-lib works!
+      sb-dashlets works!
     </p>
   `,
   styles: []
 })
-export class MyLibComponent implements OnInit {
+export class Dashlets implements OnInit {
 
   constructor() { }
 

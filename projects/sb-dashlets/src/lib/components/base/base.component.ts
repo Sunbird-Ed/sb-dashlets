@@ -7,7 +7,7 @@ import { constants } from '../../tokens/constants';
 export abstract class BaseComponent implements Partial<IBase> {
 
   constructor(protected dataService: DataService) { }
-
+  //TODO
   height: string = "100%";
   width: string = "100%";
   id: string;
@@ -37,7 +37,7 @@ export abstract class BaseComponent implements Partial<IBase> {
   }
 
   getConfigValue(key: string) {
-    return this.config[key];
+    return this.config && this.config[key];
   }
 
   protected checkIfInitialized(): never | void {

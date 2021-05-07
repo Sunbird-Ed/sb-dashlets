@@ -38,8 +38,6 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     super(dataService);
     this._defaultConfig = defaultConfig;
   }
-  chartClick: EventEmitter<any>;
-  chartHover: EventEmitter<any>;
 
   /**
    * @description initializes the component with the passed config and data
@@ -146,7 +144,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     if (data) {
       const { labelExpr, datasets: datasetsConfig } = config as { labelExpr: string, datasets: IDataset[] };
       if (labelExpr || datasets) {
-        this._labelsAndDatasetsClosure = this.getLabelsAndDatasetsClosure(labelExpr || this.config.labelExpr, datasetsConfig || this.config.datasets)(data);
+        this._labelsAndDatasetsClosure = this.getLabelsAndDatasetsClosure(labelExpr || this.getConfigValue(labelExpr), datasetsConfig || this.getConfigValue(datasets))(data);
       }
       ({ labels, datasets } = this._labelsAndDatasetsClosure.getData(data));
     }
@@ -191,4 +189,17 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
   }
 
+  onChartClicked(event) {
+    this.events.emit({
+      type: 'CLICK',
+      event
+    })
+  }
+
+  onChartHovered(event) {
+    this.events.emit({
+      type: 'HOVER',
+      event
+    })
+  }
 }

@@ -27,8 +27,9 @@ export class DtTableComponent extends BaseComponent {
   tableOptions = {};
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
 
-  constructor(protected dataService: DataService, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
+    this._defaultConfig = defaultConfig;
   }
 
   async initialize({ config, type, data }: InputParams): Promise<any> {

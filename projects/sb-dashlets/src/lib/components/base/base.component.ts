@@ -27,12 +27,11 @@ export abstract class BaseComponent implements Partial<IBase> {
   abstract addData(data: object);
 
   fetchData(config: IData): Observable<any[]> {
-    const { values = null, location: { url = null, apiConfig = {} } = {} } = config || {};
+    const { values = null, location: { url = null, options = {}, method = 'GET' } = {} } = config || {};
     if (values) return of(values);
-    if(!url) throw new Error('invalid input');
-    let input = { url, ...apiConfig };
+    if (!url) throw new Error('invalid input');
     this.state.emit(ReportState.PENDING);
-    return this.dataService.fetchData(input).pipe(
+    return this.dataService.fetchData({ method, url, options }).pipe(
       tap(_ => this.state.emit(ReportState.DONE))
     );
   }

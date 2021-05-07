@@ -46,6 +46,13 @@ export class AppComponent {
     values: data
   };
 
+  // data: IData = {
+  //   location: {
+  //     url: 'http://127.0.0.1:8080/data.json',
+  //     method: 'GET'
+  //   }
+  // }
+
   dtOptions = {
     data: data,
     info: false,
@@ -71,16 +78,29 @@ export class AppComponent {
 
 
   bigNumberConfig = {
-    header: 'Total Device Count',
+    header: 'Total Device Count (SUM)',
     footer: 'Uttar Pradesh',
     dataExpr: 'Total Devices'
   }
 
   bigNumberConfig2 = {
-    header: 'Total New Devices Count',
+    header: 'Total New Devices Count (MAX)',
+    footer: 'Uttar Pradesh',
+    dataExpr: 'New Devices',
+    operation: 'MAX'
+  }
+  bigNumberConfig3 = {
+    header: 'Total New Devices Count (MIN)',
     footer: 'Uttar Pradesh',
     dataExpr: 'New Devices',
     operation: 'MIN'
+  }
+
+  bigNumberConfig4 = {
+    header: 'Total New Devices Count (MIN)',
+    footer: 'Uttar Pradesh',
+    dataExpr: 'New Devices',
+    operation: 'AVG'
   }
 
   columnsConfiguration = {

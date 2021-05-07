@@ -41,18 +41,19 @@ export interface IBase {
 
 export type methodType = "GET" | "POST";
 export interface IApiConfig {
-  url: string;
   body: object | null;
   headers?: {
     [header: string]: string | string[];
   };
-  methodType: methodType;
   params?: {
     [param: string]: string | string[];
   };
+  responseType?: 'arraybuffer' | 'blob' | 'json' | 'text';
+  reportProgress?: boolean;
   response: {
     path: string;
-  }
+  };
+  [key: string]: any
 }
 export interface IDataSchema {
   type: string,
@@ -64,8 +65,9 @@ export interface IDataSchema {
 export interface IData {
   values?: unknown[];
   location?: {
-    apiConfig?: IApiConfig;
+    options?: Partial<IApiConfig>;
     url?: string;
+    method?: string;
   },
   dataSchema?: {
     [key: string]: IDataSchema;

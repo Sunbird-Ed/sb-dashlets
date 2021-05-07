@@ -27,7 +27,7 @@ export class DtTableComponent extends BaseComponent {
   tableOptions = {};
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
 
-  constructor(protected dataService: DataService, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject, @Inject(DEFAULT_CONFIG) defaultConfig: object) {
+  constructor(protected dataService: DataService, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
   }
 

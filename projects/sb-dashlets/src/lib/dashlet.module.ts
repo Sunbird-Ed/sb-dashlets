@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { DashletComponent, ChartJsComponent, BigNumberComponent, DtTableComponent } from './components';
 import { ReportWrapperDirective } from './directives';
 import { HttpClientModule } from '@angular/common/http'
-import { ChartsModule } from 'ng2-charts'
+import { ChartsModule, ThemeService } from 'ng2-charts'
 import { CommonModule } from '@angular/common';
 import { DataTablesModule } from "angular-datatables";
 
@@ -10,6 +10,7 @@ import { DataTablesModule } from "angular-datatables";
   declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent],
   imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule],
   exports: [DashletComponent],
+  providers: [ThemeService],
   entryComponents: [ChartJsComponent, BigNumberComponent, DtTableComponent]
 })
 export class DashletModule { }

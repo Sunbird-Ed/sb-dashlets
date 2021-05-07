@@ -1,0 +1,14 @@
+<ng-template #defaultTemplate let-config>
+  <div>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{config?.header}}</h5>
+        <p class="card-text">{{config?.data}}</p>
+        <p class="card-text">{{config?.footer}}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="chart" [ngTemplateOutlet]="defaultTemplate" [ngTemplateOutletContext]="{'$implicit': chart}">
+</ng-container>

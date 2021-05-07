@@ -4,5 +4,14 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": ["ng2-semantic-ui"]
+  "whitelistedNonPeerDependencies": [
+    "ng2-semantic-ui",
+    "chart.js",
+    "ng2-charts",
+    "lodash-es",
+    "datatables.net",
+    "datatables.net-dt",
+    "angular-datatables",
+    "jquery"
+  ]
 }

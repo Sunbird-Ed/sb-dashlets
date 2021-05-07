@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+
+    <div class="alert alert-primary mt-3" role="alert">
+      Following Charts shows the UP State Device Data using Dashlet Widget.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm mt-5">
+      <sb-dashlet [type]="type" [data]="data" [config]="config2"></sb-dashlet>
+    </div>
+    <div class="col-sm mt-5">
+      <sb-dashlet [type]="'bar'" [data]="data" [config]="config2"></sb-dashlet>
+    </div>
+    <div class="col-sm mt-5">
+      <sb-dashlet [type]="'pie'" [data]="data" [config]="config2"></sb-dashlet>
+    </div>
+    <div class="col-sm mt-5" >
+      <sb-dashlet [type]="'doughnut'" [data]="data" [config]="config2"></sb-dashlet>
+    </div>
+    <div class="col-sm mt-5">
+      <sb-dashlet [type]="'pie'" [data]="data" [config]="config"></sb-dashlet>
+    </div>
+    <div class="col-sm mt-5">
+      <sb-dashlet [type]="'bar'" [data]="data" [config]="config2"></sb-dashlet>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mt-5">
+      <sb-dashlet [type]="'bigNumber'" [data]="data" [config]="bigNumberConfig"></sb-dashlet>
+    </div>
+    <div class="col mt-5">
+      <sb-dashlet [type]="'bigNumber'" [data]="data" [config]="bigNumberConfig2"></sb-dashlet>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg mt-2">
+      <sb-dashlet [type]="'table'" [data]="data" [config]="columnsConfiguration"></sb-dashlet>
+
+      <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover"></table> -->
+    </div>
+  </div>
+</div>

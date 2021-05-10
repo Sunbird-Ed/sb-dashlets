@@ -1,7 +1,13 @@
 
 const DEFAULT_CONFIG = {
-  paging: true,
-  info: true,
+  tableLevelConfig: {
+    autoWidth: true,
+    paging: false,
+    bFilter: true,
+    bInfo: true,
+    info: false,
+    searchable: false
+  },
   columnConfig: {
     searchable: true,
     orderable: true,

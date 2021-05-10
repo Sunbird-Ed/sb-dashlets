@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { DataService } from '../../services';
 import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens';
@@ -19,13 +19,14 @@ declare var $;
     }
   ]
 })
-export class DtTableComponent extends BaseComponent {
+export class DtTableComponent extends BaseComponent implements AfterViewInit {
 
   reportType: IReportType = IReportType.TABLE;
   config: object;
-  _defaultConfig: object;
+  _defaultConfig: typeof defaultConfiguration;
   tableOptions = {};
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
+  private _dtClosure: any;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -38,6 +39,10 @@ export class DtTableComponent extends BaseComponent {
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
     this.tableBuilder(config, fetchedJSON);
     this._isInitialized = true;
+  }
+
+  ngAfterViewInit() {
+    this._dtClosure = this._tableOpsClosure();
   }
 
   private rowClickHandler = (row: Node, data: any[] | Object, index: number) => {
@@ -64,7 +69,7 @@ export class DtTableComponent extends BaseComponent {
 
   private _setTableOptions(config: object = {}) {
     this.tableOptions = {
-      ...this._defaultConfig,
+      ...this._defaultConfig.tableLevelConfig,
       ...this.tableOptions,
       ...config
     }
@@ -75,7 +80,14 @@ export class DtTableComponent extends BaseComponent {
   }
 
   destroy(): void {
-    throw new Error('Method not implemented.');
+    const { destroy } = this._dtClosure;
+    if (destroy && typeof destroy === 'function') {
+      try {
+        destroy.call(this._dtClosure);
+      } catch (err) {
+        console.error('component not destroyed', err);
+      }
+    }
   }
 
   update(input: UpdateInputParams) {
@@ -90,13 +102,40 @@ export class DtTableComponent extends BaseComponent {
     });
   };
 
-  private getTableInstance(): Promise<any> {
-    return this.dataTableElement.dtInstance;
+  addData(data: object | object[]) {
+    const { addData } = this._dtClosure;
+    if (addData && typeof addData === 'function') {
+      try {
+        addData.call(this._dtClosure, data);
+      } catch (error) {
+        console.error('addition of data failed', error);
+      }
+    }
   }
 
-  addData(data: object | object[]) {
-    this.getTableInstance().then(instance => {
-      instance.row.add(data);
-    })
+  private _tableOpsClosure() {
+    const _getInstance = () => this.dataTableElement && this.dataTableElement.dtInstance;
+    const _addData = data => instance => instance.row.add(data);
+
+    return {
+      getInstance() {
+        return _getInstance();
+      },
+      addData(data: object | object[]) {
+        this.getInstance()
+          .then(_addData(data))
+          .then(this.draw.bind(this))
+      },
+      async draw() {
+        const instance = await this.getInstance();
+        instance.draw();
+      },
+      async destroy() {
+        const instance = await this.getInstance();
+        instance.destroy()
+
+      }
+    }
   }
+
 }

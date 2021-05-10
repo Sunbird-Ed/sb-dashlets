@@ -3,8 +3,8 @@ const DEFAULT_CONFIG = {
   tableLevelConfig: {
     autoWidth: true,
     paging: false,
-    bFilter: true,
-    bInfo: true,
+    bFilter: false,
+    bInfo: false,
     info: false,
     searchable: false
   },

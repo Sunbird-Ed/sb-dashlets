@@ -1,5 +1,4 @@
-import { Component, ComponentFactoryResolver, ContentChild, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
-import EventEmitter from 'events';
+import { Component, ComponentFactoryResolver, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ReportWrapperDirective } from '../../directives';
 import { IBase } from '../../types';
 import TYPE_TO_COMPONENT_MAPPING from './type_to_component_mapping';

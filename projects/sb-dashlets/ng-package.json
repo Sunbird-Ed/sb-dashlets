@@ -12,6 +12,7 @@
     "datatables.net",
     "datatables.net-dt",
     "angular-datatables",
-    "jquery"
+    "jquery",
+    "@types/datatables.net"
   ]
 }

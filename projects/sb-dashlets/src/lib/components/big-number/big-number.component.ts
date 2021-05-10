@@ -79,7 +79,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
     throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
   }
 
-  update(input: Partial<Omit<UpdateInputParams, "type">>) {
+  update(input: Partial<UpdateInputParams>) {
     this.checkIfInitialized();
     if (!input) throw new Error(this.CONSTANTS.INVALID_INPUT);
     const { config = {}, data = null } = input;

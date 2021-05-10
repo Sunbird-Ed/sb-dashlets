@@ -11,7 +11,11 @@ export type InputParams = {
   data: IData
 }
 
-export type UpdateInputParams = Omit<InputParams, "data"> & { data: object[] };
+export type UpdateInputParams = {
+  type: string;
+  config: object;
+  data: object[]
+}
 
 export enum ReportState {
   PENDING = "pending",

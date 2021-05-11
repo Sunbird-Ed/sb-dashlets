@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { DataService } from '../../services';
-import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject } from '../../types';
+import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types';
 import { BaseComponent } from '../base/base.component';
 import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS } from '../../tokens';
 import { runAggregator } from './operations';
@@ -26,7 +26,8 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   type: ChartType = ChartType.BIG_NUMBER;
   _defaultConfig: IBigNumberConfig;
 
-  chart: IBigNumberConfig = {};
+  inputParameters: IBigNumberConfig = {};
+  exportOptions = [];
 
   private _bigNumberClosure: any;
 
@@ -41,6 +42,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
     this.chartBuilder(config as IBigNumberConfig, fetchedJSON);
     this._isInitialized = true;
+    this.state.emit(ReportState.DONE);
   }
 
   chartBuilder(config: IBigNumberConfig, JSONData) {
@@ -54,7 +56,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   }
 
   private setBigNumberData(config: object = {}) {
-    this.chart = { ...this._defaultConfig, ...this.chart, ...config };
+    this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
     this.cdr.detectChanges();
   }
 

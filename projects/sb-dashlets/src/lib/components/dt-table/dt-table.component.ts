@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { DataService } from '../../services';
 import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens';
-import { IReportType, InputParams, UpdateInputParams, StringObject } from '../../types';
+import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types';
 import { BaseComponent } from '../base/base.component';
 import defaultConfiguration from './defaultConfiguration';
 
@@ -24,7 +24,9 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   reportType: IReportType = IReportType.TABLE;
   config: object;
   _defaultConfig: typeof defaultConfiguration;
-  tableOptions = {};
+  inputParameters = {};
+  exportOptions = ['csv'];
+
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
   private _dtClosure: any;
 
@@ -39,6 +41,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
     this.tableBuilder(config, fetchedJSON);
     this._isInitialized = true;
+    this.state.emit(ReportState.DONE);
   }
 
   ngAfterViewInit() {
@@ -68,9 +71,9 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   }
 
   private _setTableOptions(config: object = {}) {
-    this.tableOptions = {
+    this.inputParameters = {
       ...this._defaultConfig.tableLevelConfig,
-      ...this.tableOptions,
+      ...this.inputParameters,
       ...config
     }
   }

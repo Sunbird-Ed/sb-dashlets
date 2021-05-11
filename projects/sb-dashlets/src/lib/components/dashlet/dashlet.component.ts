@@ -1,9 +1,9 @@
 import { Component, ComponentFactoryResolver, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { ReportWrapperDirective } from '../../directives';
-import { IBase } from '../../types';
+import { CustomEvent, IBase, ReportState } from '../../types';
 import TYPE_TO_COMPONENT_MAPPING from './type_to_component_mapping';
 
-type componentInstanceType = Pick<IBase, "initialize" | "events">;
+type componentInstanceType = Pick<IBase, "initialize" | "events" | "state">;
 @Component({
   selector: 'sb-dashlet',
   templateUrl: './dashlet.component.html',
@@ -52,8 +52,15 @@ export class DashletComponent implements OnInit {
     const componentRef = this.reportWrapper.viewContainerRef.createComponent(componentFactory);
     this.instance = componentRef.instance;
     componentRef.instance.initialize({ config: this.config, type: this.type, data: this.data });
-    componentRef.instance.events.subscribe(event => {
-      this.events.emit(event);
-    })
+    componentRef.instance.state.subscribe(this._stateEventsHandler.bind(this));
+    componentRef.instance.events.subscribe(this._eventsHandler.bind(this));
+  }
+
+  private _stateEventsHandler(event: ReportState) {
+    console.log(event);
+  }
+
+  private _eventsHandler(event: CustomEvent) {
+    this.events.emit(event);
   }
 }

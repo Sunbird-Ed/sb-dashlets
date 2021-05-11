@@ -12,5 +12,5 @@
   </div>
 </ng-template>
 
-<ng-container *ngIf="chart" [ngTemplateOutlet]="defaultTemplate" [ngTemplateOutletContext]="{'$implicit': chart}">
+<ng-container *ngIf="inputParameters" [ngTemplateOutlet]="defaultTemplate" [ngTemplateOutletContext]="{'$implicit': inputParameters}">
 </ng-container>

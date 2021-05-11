@@ -20,6 +20,15 @@ export abstract class BaseComponent implements Partial<IBase> {
   abstract config: object;
   abstract _defaultConfig: object;
 
+  abstract exportOptions: string[] = [];
+
+  /**
+   * @description This variable will hold the context object passed to the template or underlying library
+   * @abstract
+   * @memberof BaseComponent
+   */
+  abstract inputParameters;
+
   abstract initialize(config: InputParams): Promise<any>
   abstract reset(): void;
   abstract destroy(): void;

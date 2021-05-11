@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
 import { BaseChartDirective } from 'ng2-charts';
-import { IData, InputParams, IReportType, IDataset, IChart, StringObject } from '../../types';
+import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types';
 import { BaseComponent } from '../base/base.component';
 import { IChartOptions, ChartType, UpdateInputParams } from '../../types';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
@@ -31,8 +31,9 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   config: Partial<IChartOptions>;
   type: ChartType;
 
-  public chartData: Partial<IChartOptions> = {};
+  public inputParameters: Partial<IChartOptions> = {};
   _labelsAndDatasetsClosure: any;
+  exportOptions = [];
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -51,6 +52,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
     this.chartBuilder(config, fetchedJSON);
     this._isInitialized = true;
+    this.state.emit(ReportState.DONE);
   }
 
   /**
@@ -116,7 +118,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   }
 
   private setChartData(config: Partial<IChartOptions> = {}) {
-    this.chartData = { ...this._defaultConfig, ...this.chartData, ...config };
+    this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
   }
 
   reset(): void {

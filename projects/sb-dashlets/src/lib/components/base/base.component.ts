@@ -30,6 +30,7 @@ export abstract class BaseComponent implements Partial<IBase> {
   abstract inputParameters;
 
   abstract initialize(config: InputParams): Promise<any>
+  abstract builder(config, data): void;
   abstract reset(): void;
   abstract destroy(): void;
   abstract update(config: UpdateInputParams);

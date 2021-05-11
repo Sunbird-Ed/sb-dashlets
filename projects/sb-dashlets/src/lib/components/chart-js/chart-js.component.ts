@@ -50,7 +50,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     if (!(config && type && data)) throw new SyntaxError(this.CONSTANTS.INVALID_INPUT);
     this.config = config = { ...config, type };
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
-    this.chartBuilder(config, fetchedJSON);
+    this.builder(config, fetchedJSON);
     this._isInitialized = true;
     this.state.emit(ReportState.DONE);
   }
@@ -106,7 +106,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
    * @param {*} data
    * @memberof ChartJsComponent
    */
-  chartBuilder(config: Partial<IChartOptions>, data) {
+  builder(config: Partial<IChartOptions>, data) {
     let { labels = [], labelExpr = null, type = null, legend = true, colors = [], datasets = [], options = {}, ...others } = config;
     options = { ...others, ...options };
     if (labelExpr) {

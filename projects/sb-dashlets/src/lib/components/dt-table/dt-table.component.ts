@@ -39,13 +39,13 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     if (!(config && type && data)) throw new SyntaxError(this.CONSTANTS.INVALID_INPUT);
     this.config = config = { ...config, type };
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
-    this.tableBuilder(config, fetchedJSON);
+    this.builder(config, fetchedJSON);
     this._isInitialized = true;
     this.state.emit(ReportState.DONE);
   }
 
   ngAfterViewInit() {
-    this._dtClosure = this._tableOpsClosure();
+    this._dtClosure = this._tableOpsClosure(this.dataTableElement && this.dataTableElement.dtInstance);
   }
 
   private rowClickHandler = (row: Node, data: any[] | Object, index: number) => {
@@ -60,8 +60,13 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     return row;
   }
 
-  private tableBuilder(config, data) {
-    const { columnConfig: columns, ...others } = config;
+  private _addDefaultToColumn = column => {
+    return { ...this._defaultConfig.columnConfig, ...column };
+  }
+
+  builder(config, data) {
+    const { columnConfig, ...others } = config;
+    const columns = columnConfig.map(this._addDefaultToColumn);
     this._setTableOptions({
       ...others,
       data,
@@ -78,8 +83,13 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     }
   }
 
+  getRowsCount(): Promise<number> {
+    return this._dtClosure && this._dtClosure.rowsCount();
+  }
+
+  // resets to the original state.
   reset(): void {
-    throw new Error('Method not implemented.');
+    this._dtClosure.updateData(this.data);
   }
 
   destroy(): void {
@@ -98,6 +108,9 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     if (!input) throw new Error(this.CONSTANTS.INVALID_INPUT);
     const { config = {}, data = null } = input;
     const { columnConfig: columns, ...others } = config as any;
+    if (data && this._dtClosure) {
+      this._dtClosure.updateData(data);
+    }
     this._setTableOptions({
       ...others,
       ...(data && { data }),
@@ -105,7 +118,24 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     });
   };
 
-  addData(data: object | object[]) {
+  addRows(data: object | object[]): void {
+    this.addData(data);
+  }
+
+  getRowAtIndex(index): Promise<any> {
+    const { getRowAtIndex } = this._dtClosure;
+    if (getRowAtIndex) {
+      return getRowAtIndex.bind(this._dtClosure, index);
+    }
+  }
+
+  async removeRow(index: number) {
+    const data = await this._dtClosure.getData();
+    data.splice(index, 1);
+    await this._dtClosure.updateData(data);
+  }
+
+  addData(data: object | object[]): void {
     const { addData } = this._dtClosure;
     if (addData && typeof addData === 'function') {
       try {
@@ -116,29 +146,44 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     }
   }
 
-  private _tableOpsClosure() {
-    const _getInstance = () => this.dataTableElement && this.dataTableElement.dtInstance;
-    const _addData = data => instance => instance.row.add(data);
-
+  private _tableOpsClosure(tableInstance) {
     return {
-      getInstance() {
-        return _getInstance();
+      get instance() {
+        return tableInstance;
       },
-      addData(data: object | object[]) {
-        this.getInstance()
-          .then(_addData(data))
-          .then(this.draw.bind(this))
-      },
-      async draw() {
-        const instance = await this.getInstance();
+      async addData(data: object | object[]) {
+        const instance = await this.instance;
+        instance.row.add(data);
         instance.draw();
       },
+      async draw() {
+        const instance = await this.instance;
+        instance.draw();
+        return instance;
+      },
       async destroy() {
-        const instance = await this.getInstance();
-        instance.destroy()
-
+        const instance = await this.instance;
+        instance.destroy();
+        return instance;
+      },
+      async updateData(data) {
+        const instance = await this.instance;
+        instance.clear();
+        instance.rows.add(data);
+        instance.draw();
+      },
+      async rowsCount() {
+        const instance = await this.instance;
+        return instance.rows().count();
+      },
+      async getData() {
+        const instance = await this.instance;
+        return instance.rows().data();
+      },
+      async getRowAtIndex(index: number) {
+        const data = await this.getData();
+        return data[index];
       }
     }
   }
-
 }

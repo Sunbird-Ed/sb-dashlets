@@ -107,13 +107,9 @@ export class AppComponent {
     autoWidth: true,
     paging: true,
     info: true,
-    dom: 'Bfrtip',
-    buttons: [
-      'copy', 'csv', 'excel', 'pdf', 'print'
-    ],
     columnConfig: [
-      { title: "District", data: "District", searchable: true, orderable: true, autoWidth: true, visible: true },
-      { title: "Total Devices", data: "Total Devices", searchable: true, orderable: true, autoWidth: true, visible: true },
+      { title: "District", data: "District" },
+      { title: "Total Devices", data: "Total Devices" },
     ]
   }
   constructor() { }

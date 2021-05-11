@@ -11,7 +11,8 @@ const DEFAULT_CONFIG = {
   columnConfig: {
     searchable: true,
     orderable: true,
-    visible: true
+    visible: true,
+    autoWidth: true
   }
 };
 

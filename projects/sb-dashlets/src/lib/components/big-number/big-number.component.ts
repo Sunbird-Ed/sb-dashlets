@@ -40,12 +40,12 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
     if (!(config && data)) throw new SyntaxError(this.CONSTANTS.INVALID_INPUT);
     this.config = config = { ...config, type };
     const fetchedJSON = this.data = await this.fetchData(data).toPromise().catch(err => []);
-    this.chartBuilder(config as IBigNumberConfig, fetchedJSON);
+    this.builder(config as IBigNumberConfig, fetchedJSON);
     this._isInitialized = true;
     this.state.emit(ReportState.DONE);
   }
 
-  chartBuilder(config: IBigNumberConfig, JSONData) {
+  builder(config: IBigNumberConfig, JSONData) {
     const { header = this._defaultConfig.header, footer = this._defaultConfig.footer, dataExpr, operation = this._defaultConfig.operation } = config;
     if (!dataExpr || !JSONData) {
       throw Error(this.CONSTANTS.INVALID_INPUT);

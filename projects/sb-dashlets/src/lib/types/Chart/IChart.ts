@@ -6,7 +6,6 @@ export interface IChartBase extends IBase {
   type: ChartType;
   config: object
   readonly _defaultConfig: object
-  chartBuilder(config, data);
 }
 
 export interface IChart extends IChartBase {

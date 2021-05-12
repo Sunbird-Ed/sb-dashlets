@@ -29,8 +29,8 @@ export type CustomEvent = {
 export interface IBase {
   reportType: IReportType;
   readonly _defaultConfig: object;
-  height: string;
-  width: string;
+  height?: string;
+  width?: string;
   id: string;
   config: object;
   data: object[];

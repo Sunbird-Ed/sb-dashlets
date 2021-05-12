@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { DataService } from '../../services';
 import { Observable, of } from 'rxjs';
 import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent } from '../../types';
@@ -6,21 +6,20 @@ import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
 export abstract class BaseComponent implements Partial<IBase> {
 
-  constructor(protected dataService: DataService) { }
-  //TODO
-  height: string = "100%";
-  width: string = "100%";
-  id: string;
-  state = new EventEmitter<ReportState>();
-  events = new EventEmitter<CustomEvent>();
-  protected _isInitialized: boolean = false;
+  constructor(protected dataService: DataService) { }  
 
+  id: string;
+  protected _isInitialized: boolean = false;
+  $context = {};
   data = [];
   abstract reportType: IReportType;
   abstract config: object;
   abstract _defaultConfig: object;
-
-  abstract exportOptions: string[] = [];
+  abstract exportOptions: string[] = [];  
+  templateRefs: Record<string, TemplateRef<any>>;
+  
+  state = new EventEmitter<ReportState>();
+  events = new EventEmitter<CustomEvent>();
 
   /**
    * @description This variable will hold the context object passed to the template or underlying library
@@ -55,4 +54,5 @@ export abstract class BaseComponent implements Partial<IBase> {
       throw Error(constants.CHART_NOT_INITIALIZED);
     }
   }
+
 }

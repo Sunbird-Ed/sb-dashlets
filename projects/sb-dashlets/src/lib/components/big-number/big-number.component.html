@@ -12,5 +12,6 @@
   </div>
 </ng-template>
 
-<ng-container *ngIf="inputParameters" [ngTemplateOutlet]="defaultTemplate" [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="inputParameters" [ngTemplateOutlet]="templateRefs?.body || defaultTemplate"
+  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
 </ng-container>

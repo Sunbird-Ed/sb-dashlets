@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, TemplateRef } from '@angular/core';
 import { DataService } from '../../services';
 import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types';
 import { BaseComponent } from '../base/base.component';
@@ -25,10 +25,8 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   reportType: IReportType = IReportType.CHART;
   type: ChartType = ChartType.BIG_NUMBER;
   _defaultConfig: IBigNumberConfig;
-
   inputParameters: IBigNumberConfig = {};
   exportOptions = [];
-
   private _bigNumberClosure: any;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
@@ -57,6 +55,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
   private setBigNumberData(config: object = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters }
     this.cdr.detectChanges();
   }
 

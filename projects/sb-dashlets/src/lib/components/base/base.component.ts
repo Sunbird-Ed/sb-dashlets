@@ -10,7 +10,7 @@ export abstract class BaseComponent implements Partial<IBase> {
 
   id: string;
   protected _isInitialized: boolean = false;
-  $context = {};
+  $context;
   data = [];
   abstract reportType: IReportType;
   abstract config: object;

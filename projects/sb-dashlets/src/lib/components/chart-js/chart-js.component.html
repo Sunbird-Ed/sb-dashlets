@@ -1,13 +1,13 @@
-<ng-container *ngIf="templateRefs?.header" [ngTemplateOutlet]="templateRefs?.header"
-  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="templateRefs?.header && $context" [ngTemplateOutlet]="templateRefs?.header"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>
 
-<div *ngIf="inputParameters as data">
+<div *ngIf="$context?.inputParameters as data">
   <canvas baseChart width="400" height="400" [datasets]="data?.datasets" [labels]="data?.labels"
     [options]="data?.options" [colors]="data?.colors" [legend]="data?.legend" [chartType]="data?.type"
     (chartClick)="onChartClicked($event)" (chartHover)="onChartHovered($event)"></canvas>
 </div>
 
-<ng-container *ngIf="templateRefs?.footer" [ngTemplateOutlet]="templateRefs?.footer"
-  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="templateRefs?.footer && $context" [ngTemplateOutlet]="templateRefs?.footer"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>

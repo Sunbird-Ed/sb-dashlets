@@ -2,16 +2,16 @@
   <div class="ui cards">
     <div class="card">
       <div class="content">
-        <div class="header">{{config?.header}}</div>
-        <div class="meta">{{config?.footer}}</div>
+        <div class="header">{{config?.inputParameters?.header}}</div>
+        <div class="meta">{{config?.inputParameters?.footer}}</div>
         <div class="description">
-          {{config?.data}}
+          {{config?.inputParameters?.data}}
         </div>
       </div>
     </div>
   </div>
 </ng-template>
 
-<ng-container *ngIf="inputParameters" [ngTemplateOutlet]="templateRefs?.body || defaultTemplate"
-  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="$context" [ngTemplateOutlet]="templateRefs?.body || defaultTemplate"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>

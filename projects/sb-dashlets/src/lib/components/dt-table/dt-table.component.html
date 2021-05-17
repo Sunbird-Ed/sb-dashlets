@@ -1,9 +1,9 @@
-<ng-container *ngIf="templateRefs?.header" [ngTemplateOutlet]="templateRefs?.header"
-  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="templateRefs?.header && $context" [ngTemplateOutlet]="templateRefs?.header"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>
 
-<table datatable [dtOptions]="inputParameters" class="row-border hover"></table>
+<table datatable [dtOptions]="$context?.inputParameters" class="row-border hover"></table>
 
-<ng-container *ngIf="templateRefs?.footer" [ngTemplateOutlet]="templateRefs?.footer"
-  [ngTemplateOutletContext]="{'$implicit': inputParameters}">
+<ng-container *ngIf="templateRefs?.footer && $context" [ngTemplateOutlet]="templateRefs?.footer"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>

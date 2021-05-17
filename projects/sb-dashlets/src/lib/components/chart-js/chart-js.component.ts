@@ -119,6 +119,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
 
   private setChartData(config: Partial<IChartOptions> = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters };
   }
 
   reset(): void {

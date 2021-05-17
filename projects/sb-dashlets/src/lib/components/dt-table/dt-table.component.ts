@@ -26,7 +26,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   _defaultConfig: typeof defaultConfiguration;
   inputParameters = {};
   exportOptions = ['csv'];
-
+  
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
   private _dtClosure: any;
 
@@ -81,6 +81,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
       ...this.inputParameters,
       ...config
     }
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters };
   }
 
   getRowsCount(): Promise<number> {

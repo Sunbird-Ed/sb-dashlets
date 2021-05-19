@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Renderer } from '@angular/core';
+import { Router } from '@angular/router';
 import { data } from './data';
 
 @Component({
@@ -6,7 +7,7 @@ import { data } from './data';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'dashlet-showcase';
 
   type = "line";
@@ -104,13 +105,54 @@ export class AppComponent {
   }
 
   columnsConfiguration = {
-    autoWidth: true,
-    paging: true,
-    info: true,
+    filters: [
+      {
+        "reference": "type",
+        "controlType": "multi-select",
+        "displayName": "Select Type",
+        "placeholder": "Select Type",
+        "label": "Select Portal/App",
+        "searchable": true
+      },
+      {
+        "reference": "District",
+        "controlType": "multi-select",
+        "displayName": "Select District",
+        "placeholder": "Select District Name",
+        "label": "District",
+        "searchable": true
+      },
+      {
+        "reference": "Total Plays",
+        "controlType": "multi-select",
+        "placeholder": "Select Total Count",
+        "label": "Total Plays",
+        "searchable": true
+      },
+      {
+        "reference": "dateFormat",
+        "controlType": "date",
+        "placeholder": "Select Date Range",
+        "label": "Select Date Range",
+        "dateFormat": "DD-MM-YYYY"
+      }
+    ],
+    order: [1, 'desc'],
     columnConfig: [
       { title: "District", data: "District" },
       { title: "Total Devices", data: "Total Devices" },
+      { title: 'Total Plays', data: 'Total Plays' },
+      { title: 'District', data: 'District', render(data) { return `<button data="${data}" class="btn btn-primary">Action</button>` } }
     ]
   }
-  constructor() { }
+
+  constructor(private renderer: Renderer) { }
+
+  ngAfterViewInit(): void {
+    this.renderer.listenGlobal('document', 'click', (event) => {
+      if (event.target.hasAttribute("data")) {
+        // do something with the data
+      }
+    });
+  }
 }

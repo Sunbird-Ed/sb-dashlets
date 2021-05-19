@@ -20,13 +20,15 @@ export class DashletComponent implements OnInit {
   @Input() type: string;
   @Input() config: object;
   @Input() data: object;
+  
   @Output() events = new EventEmitter();
+  
+  private _componentInstance;
 
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
   private readonly _typeToComponentMapping = Object.freeze(TYPE_TO_COMPONENT_MAPPING);
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
 
-  private _componentInstance;
   get instance() {
     return this._componentInstance;
   }

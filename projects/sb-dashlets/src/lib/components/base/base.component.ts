@@ -6,28 +6,22 @@ import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
 export abstract class BaseComponent implements Partial<IBase> {
 
-  constructor(protected dataService: DataService) { }  
+  constructor(protected dataService: DataService) { }
 
   id: string;
-  protected _isInitialized: boolean = false;
+  templateRefs: Record<string, TemplateRef<any>>;
   $context;
   data = [];
+  protected _isInitialized: boolean = false;
+
+  state = new EventEmitter<ReportState>();
+  events = new EventEmitter<CustomEvent>();
+x
+  abstract inputParameters;
   abstract reportType: IReportType;
   abstract config: object;
   abstract _defaultConfig: object;
-  abstract exportOptions: string[] = [];  
-  templateRefs: Record<string, TemplateRef<any>>;
-  
-  state = new EventEmitter<ReportState>();
-  events = new EventEmitter<CustomEvent>();
-
-  /**
-   * @description This variable will hold the context object passed to the template or underlying library
-   * @abstract
-   * @memberof BaseComponent
-   */
-  abstract inputParameters;
-
+  abstract exportOptions: string[] = [];
   abstract initialize(config: InputParams): Promise<any>
   abstract builder(config, data): void;
   abstract reset(): void;

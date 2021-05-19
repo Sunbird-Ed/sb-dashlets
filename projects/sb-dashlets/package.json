@@ -18,7 +18,9 @@
     "datatables.net-dt": "1.10.20",
     "jquery": "3.4.1",
     "angular-datatables": "11.1.1",
-    "@types/datatables.net": "1.10.19"
+    "@types/datatables.net": "1.10.19",
+    "ng-multiselect-dropdown": "0.3.4",
+    "ngx-daterangepicker-material": "4.0.1"
   },
   "keywords": [
     "dashlets",

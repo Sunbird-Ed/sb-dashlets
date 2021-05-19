@@ -20,15 +20,16 @@ declare var $;
   ]
 })
 export class DtTableComponent extends BaseComponent implements AfterViewInit {
+  
+  private _dtClosure: any;
 
-  reportType: IReportType = IReportType.TABLE;
-  config: object;
-  _defaultConfig: typeof defaultConfiguration;
-  inputParameters = {};
-  exportOptions = ['csv'];
+  public reportType: IReportType = IReportType.TABLE;
+  public config: object;
+  public _defaultConfig: typeof defaultConfiguration;
+  public inputParameters = {};
+  public exportOptions = ['csv'];
   
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
-  private _dtClosure: any;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -104,7 +105,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     }
   }
 
-  update(input: UpdateInputParams) {
+  update(input: Partial<UpdateInputParams>) {
     this.checkIfInitialized();
     if (!input) throw new Error(this.CONSTANTS.INVALID_INPUT);
     const { config = {}, data = null } = input;

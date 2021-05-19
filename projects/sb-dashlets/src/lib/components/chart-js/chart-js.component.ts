@@ -27,13 +27,12 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   @ViewChild(BaseChartDirective, { static: true }) baseChartDirective: BaseChartDirective;
   readonly reportType: IReportType = IReportType.CHART;
 
-  _defaultConfig: Partial<IChartOptions>;
-  config: Partial<IChartOptions>;
-  type: ChartType;
-
+  public _defaultConfig: Partial<IChartOptions>;
+  public config: Partial<IChartOptions>;
+  public type: ChartType;
   public inputParameters: Partial<IChartOptions> = {};
-  _labelsAndDatasetsClosure: any;
-  exportOptions = [];
+  public _labelsAndDatasetsClosure: any;
+  public exportOptions = [];
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);

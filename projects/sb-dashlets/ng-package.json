@@ -13,6 +13,8 @@
     "datatables.net-dt",
     "angular-datatables",
     "jquery",
-    "@types/datatables.net"
+    "@types/datatables.net",
+    "ng-multiselect-dropdown",
+    "ngx-daterangepicker-material"
   ]
 }

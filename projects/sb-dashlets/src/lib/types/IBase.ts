@@ -77,14 +77,5 @@ export interface IData {
     [key: string]: IDataSchema;
   }
 }
-export interface IFilterConfig {
-  reference: string;
-  label: string;
-  placeholder: string;
-  controlType: "single-select" | "multi-select" | "date";
-  searchable?: boolean;
-  filters: IFilterConfig[];
-  default?: string;
-}
 
 export type StringObject = { [key: string]: string };

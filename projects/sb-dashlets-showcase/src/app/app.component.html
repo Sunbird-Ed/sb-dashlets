@@ -16,7 +16,7 @@
     <div class="col-sm mt-5">
       <sb-dashlet [type]="'pie'" [data]="data" [config]="config2"></sb-dashlet>
     </div>
-    <div class="col-sm mt-5" >
+    <div class="col-sm mt-5">
       <sb-dashlet [type]="'doughnut'" [data]="data" [config]="config2"></sb-dashlet>
     </div>
     <div class="col-sm mt-5">
@@ -26,7 +26,8 @@
       <sb-dashlet [type]="'bar'" [data]="data" [config]="config2"></sb-dashlet>
     </div>
     <div class="col-sm mt-5">
-      <sb-dashlet [type]="'bigNumber'" [data]="data" [config]="bigNumberConfig"></sb-dashlet>
+      <sb-dashlet [type]="'bigNumber'" [data]="data" [config]="bigNumberConfig">
+      </sb-dashlet>
     </div>
     <div class="col-sm mt-5">
       <sb-dashlet [type]="'bigNumber'" [data]="data" [config]="bigNumberConfig2"></sb-dashlet>
@@ -40,9 +41,19 @@
   </div>
   <div class="row mt-5">
     <div class="col-lg mt-2">
-      <sb-dashlet [type]="'table'" [data]="data" [config]="columnsConfiguration"></sb-dashlet>
+      <sb-dashlet [type]="'table'" [data]="data" [config]="columnsConfiguration">
+        <ng-template sbTemplateRef="header" let-config>
+          <div role="alert">
+            <button type="button" class="btn btn-outline-primary float-end">Export Csv</button>
+          </div>
+        </ng-template>
 
-      <!-- <table datatable [dtOptions]="dtOptions" class="row-border hover"></table> -->
+        <ng-template sbTemplateRef="footer" let-config>
+          <div class="alert alert-danger" role="alert">
+            <span class="text-center">Dashlets Footer Content</span>
+          </div>
+        </ng-template>
+      </sb-dashlet>
     </div>
   </div>
 </div>

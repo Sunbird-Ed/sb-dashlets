@@ -1,5 +1,6 @@
 import { EventEmitter } from "@angular/core";
-import { IBase, IFilterConfig, IReportType } from "../IBase";
+import { IBase } from "../IBase";
+import { IFilterConfig} from '../filter';
 import { ChartType } from './IChartType'
 
 export interface IChartBase extends IBase {

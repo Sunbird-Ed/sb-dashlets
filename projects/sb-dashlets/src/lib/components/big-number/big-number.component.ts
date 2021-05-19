@@ -21,12 +21,13 @@ import { runAggregator } from './operations';
 })
 export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
-  config: any;
-  reportType: IReportType = IReportType.CHART;
-  type: ChartType = ChartType.BIG_NUMBER;
-  _defaultConfig: IBigNumberConfig;
-  inputParameters: IBigNumberConfig = {};
-  exportOptions = [];
+  public config: any;
+  public reportType: IReportType = IReportType.CHART;
+  public type: ChartType = ChartType.BIG_NUMBER;
+  public _defaultConfig: IBigNumberConfig;
+  public inputParameters: IBigNumberConfig = {};
+  public exportOptions = [];
+
   private _bigNumberClosure: any;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {

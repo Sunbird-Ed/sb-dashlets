@@ -22,12 +22,12 @@ export class DashletComponent implements OnInit {
   @Input() type: string;
   @Input() config: object;
   @Input() data: object;
-  
+
   @Output() events = new EventEmitter();
-  
+
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
-  
+
   private _componentInstance;
   private readonly _typeToComponentMapping = Object.freeze(TYPE_TO_COMPONENT_MAPPING);
   public id: string;
@@ -71,7 +71,7 @@ export class DashletComponent implements OnInit {
   }
 
   private _stateEventsHandler(event: ReportState) {
-    // console.log(event);
+    this.events.emit({ type: 'STATE', event });
   }
 
   private _eventsHandler(event: CustomEvent) {

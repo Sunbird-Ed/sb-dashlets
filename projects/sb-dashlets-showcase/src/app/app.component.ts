@@ -98,7 +98,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   bigNumberConfig4 = {
-    header: 'Total New Devices Count (MIN)',
+    header: 'Total New Devices Count (AVG)',
     footer: 'Uttar Pradesh',
     dataExpr: 'New Devices',
     operation: 'AVG'

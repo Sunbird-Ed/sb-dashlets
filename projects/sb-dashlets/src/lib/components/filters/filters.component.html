@@ -19,7 +19,8 @@
                                 ngxDaterangepickerMd [minDate]="filter?.minDate" [maxDate]="filter?.maxDate"
                                 [ranges]="ranges" [alwaysShowCalendars]="true" [locale]="locale"
                                 [linkedCalendars]="true" [showCustomRangeLabel]="true"
-                                (change)="updateDateRange($event,filter.reference, filter?.dateFormat)" />
+                                (change)="updateDateRange($event,filter.reference, filter?.dateFormat)"
+                                #datePickerForFilters />
                         </div>
                     </ng-container>
                 </ng-container>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, Inject } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DEFAULT_CONFIG } from '../../tokens';
 import * as _ from 'lodash-es'
@@ -60,6 +60,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
   public ranges = ranges;
   public locale = { applyLabel: 'Set Date', format: 'DD-MM-YYYY' };
   public dropdownSettings: IDropdownSettings;
+
+  @ViewChild('datePickerForFilters', { static: false }) datepicker: ElementRef;
+
 
   constructor(private fb: FormBuilder, @Inject(DEFAULT_CONFIG) private defaultConfig) { }
 
@@ -175,5 +178,12 @@ export class FiltersComponent implements OnInit, OnDestroy {
       dateRange.push(currDate.clone().format(dateFormat));
     }
     this.filtersFormGroup.get(columnRef).setValue(dateRange);
+  }
+
+  reset() {
+    this.filtersFormGroup.reset();
+    if (this.datepicker) {
+      this.datepicker.nativeElement.value = '';
+    }
   }
 }

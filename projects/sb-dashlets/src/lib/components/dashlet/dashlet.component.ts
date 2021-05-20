@@ -3,8 +3,10 @@ import { element } from 'protractor';
 import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives';
 import { CustomEvent, IBase, ReportState } from '../../types';
 import TYPE_TO_COMPONENT_MAPPING from './type_to_component_mapping';
+import { v4 as uuidv4 } from 'uuid';
 
-type componentInstanceType = Pick<IBase, "initialize" | "events" | "state">;
+
+type componentInstanceType = Pick<IBase, "initialize" | "events" | "state" | "id">;
 
 const transformTemplates = (result: object, current: { slot: string, templateRef: TemplateRef<any> }) => {
   result[current.slot] = current.templateRef;
@@ -23,11 +25,13 @@ export class DashletComponent implements OnInit {
   
   @Output() events = new EventEmitter();
   
-  private _componentInstance;
-
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
-  private readonly _typeToComponentMapping = Object.freeze(TYPE_TO_COMPONENT_MAPPING);
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
+  
+  private _componentInstance;
+  private readonly _typeToComponentMapping = Object.freeze(TYPE_TO_COMPONENT_MAPPING);
+  public id: string;
+
 
   get instance() {
     return this._componentInstance;
@@ -39,6 +43,7 @@ export class DashletComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
+    this.id = uuidv4();
     if (!this.type && !this.config && !this.data) {
       throw new SyntaxError('Syntax Error. Please check configuration');
     }
@@ -59,6 +64,7 @@ export class DashletComponent implements OnInit {
     if (this.templateRefs.length) {
       instance['templateRefs'] = this.templateRefs.toArray().reduce(transformTemplates, {});
     }
+    instance.id = this.id;
     instance.initialize({ config: this.config, type: this.type, data: this.data });
     instance.state.subscribe(this._stateEventsHandler.bind(this));
     instance.events.subscribe(this._eventsHandler.bind(this));

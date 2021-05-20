@@ -138,11 +138,23 @@ export class AppComponent implements AfterViewInit {
       }
     ],
     order: [1, 'desc'],
+    searchable: true,
+    bFilter: true,
     columnConfig: [
       { title: "District", data: "District" },
       { title: "Total Devices", data: "Total Devices" },
-      { title: 'Total Plays', data: 'Total Plays' },
-      { title: 'District', data: 'District', render(data) { return `<button data="${data}" class="btn btn-primary">Action</button>` } }
+      { title: 'Total Plays Portal', data: 'Total Plays' },
+      { title: 'Total Plays App', data: 'Total Plays' },
+      { title: 'Total Count', data: 'Total Plays' },
+      { title: 'Date', data: 'dateFormat' },
+      {
+        title: 'Actions', data: 'District',
+        render(data) {
+          return `<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      <button type="button" class="btn btn-danger">Action 1</button>
+      <button type="button" class="btn btn-warning">Action 2</button>
+    </div>` }
+      }
     ]
   }
 

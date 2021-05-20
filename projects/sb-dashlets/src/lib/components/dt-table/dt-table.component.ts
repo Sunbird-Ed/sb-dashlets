@@ -20,7 +20,7 @@ declare var $;
   ]
 })
 export class DtTableComponent extends BaseComponent implements AfterViewInit {
-  
+
   private _dtClosure: any;
 
   public reportType: IReportType = IReportType.TABLE;
@@ -28,7 +28,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   public _defaultConfig: typeof defaultConfiguration;
   public inputParameters = {};
   public exportOptions = ['csv'];
-  
+
   @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
@@ -82,7 +82,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
       ...this.inputParameters,
       ...config
     }
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
   }
 
   getRowsCount(): Promise<number> {
@@ -185,6 +185,18 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
       async getRowAtIndex(index: number) {
         const data = await this.getData();
         return data[index];
+      }
+    }
+  }
+
+  exportAs(format: string) {
+    if (!this.exportOptions.includes(format)) {
+      throw new Error('given type not supported');
+    }
+    switch (format) {
+      case 'csv': {
+        this.exportAsCsv();
+        break;
       }
     }
   }

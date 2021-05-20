@@ -13,7 +13,7 @@
 </ng-container>
 
 <div *ngIf="$context?.inputParameters as data">
-  <canvas baseChart width="400" height="400" [datasets]="data?.datasets" [labels]="data?.labels"
+  <canvas [id]="id" baseChart width="400" height="400" [datasets]="data?.datasets" [labels]="data?.labels"
     [options]="data?.options" [colors]="data?.colors" [legend]="data?.legend" [chartType]="data?.type"
     (chartClick)="onChartClicked($event)" (chartHover)="onChartHovered($event)"></canvas>
 </div>

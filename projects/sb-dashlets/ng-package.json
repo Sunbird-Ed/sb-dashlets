@@ -15,6 +15,7 @@
     "jquery",
     "@types/datatables.net",
     "ng-multiselect-dropdown",
-    "ngx-daterangepicker-material"
+    "ngx-daterangepicker-material",
+    "jsonexport"
   ]
 }

@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent } from '../../types';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
+import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
+
 export abstract class BaseComponent implements Partial<IBase> {
 
   constructor(protected dataService: DataService) { }
@@ -16,7 +18,7 @@ export abstract class BaseComponent implements Partial<IBase> {
 
   state = new EventEmitter<ReportState>();
   events = new EventEmitter<CustomEvent>();
-x
+  x
   abstract inputParameters;
   abstract reportType: IReportType;
   abstract config: object;
@@ -28,6 +30,7 @@ x
   abstract destroy(): void;
   abstract update(config: UpdateInputParams);
   abstract addData(data: object);
+  abstract exportAs(format: string);
 
   fetchData(config: IData): Observable<any[]> {
     const { values = null, location: { url = null, options = {}, method = 'GET' } = {} } = config || {};
@@ -49,4 +52,20 @@ x
     }
   }
 
+  protected _downloadFile(url, filename) {
+    var link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", filename);
+    link.click();
+  }
+
+  exportAsCsv(data?: object[]) {
+    jsonExport(data || this.data, (error, csv) => {
+      if (!error && csv) {
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        this._downloadFile(url, 'data.csv');
+      }
+    })
+  }
 }

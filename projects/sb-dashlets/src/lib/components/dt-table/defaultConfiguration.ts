@@ -6,7 +6,8 @@ const DEFAULT_CONFIG = {
     bFilter: false,
     bInfo: false,
     info: false,
-    searchable: false
+    searchable: false,
+    bLengthChange: false
   },
   columnConfig: {
     searchable: true,

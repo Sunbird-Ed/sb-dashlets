@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
 import { BaseChartDirective } from 'ng2-charts';
 import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types';
@@ -24,7 +24,7 @@ import defaultConfiguration from './defaultConfiguration'
 })
 export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy {
 
-  @ViewChild(BaseChartDirective, { static: true }) baseChartDirective: BaseChartDirective;
+  @ViewChild(BaseChartDirective, { static: false }) baseChartDirective: BaseChartDirective;
   readonly reportType: IReportType = IReportType.CHART;
 
   public _defaultConfig: Partial<IChartOptions>;
@@ -32,7 +32,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public type: ChartType;
   public inputParameters: Partial<IChartOptions> = {};
   public _labelsAndDatasetsClosure: any;
-  public exportOptions = [];
+  public exportOptions = ['png', 'csv', 'jpg'];
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -118,7 +118,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
 
   private setChartData(config: Partial<IChartOptions> = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
   }
 
   reset(): void {
@@ -203,5 +203,27 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       type: 'HOVER',
       event
     })
+  }
+
+  exportAsImage(format = 'jpg') {
+    const dataUrl = (document.getElementById(this.id) as any).toDataURL(`image/${format}`, 1);
+    const fileName = `image.${format}`;
+    this._downloadFile(dataUrl, fileName);
+  }
+
+  exportAs(format: string) {
+    if (!this.exportOptions.includes(format)) {
+      throw new Error('given type not supported');
+    }
+    switch (format) {
+      case 'csv': {
+        this.exportAsCsv();
+        break;
+      }
+      default: {
+        this.exportAsImage(format);
+        break;
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, Input, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { DataService } from '../../services';
 import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types';
 import { BaseComponent } from '../base/base.component';
@@ -26,7 +26,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   public type: ChartType = ChartType.BIG_NUMBER;
   public _defaultConfig: IBigNumberConfig;
   public inputParameters: IBigNumberConfig = {};
-  public exportOptions = [];
+  public exportOptions = ['csv'];
 
   private _bigNumberClosure: any;
 
@@ -56,7 +56,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
   private setBigNumberData(config: object = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters }
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions }
     this.cdr.detectChanges();
   }
 
@@ -115,5 +115,13 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
   getTelemetry() {
     throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
+  }
+
+  exportAs(format: string) {
+    if (!this.exportOptions.includes(format)) {
+      throw new Error('given type not supported');
+    }
+
+    this.exportAsCsv();
   }
 }

@@ -21,11 +21,11 @@
       "dom"
     ],
     "paths": {
-      "my-lib": [
-        "dist/my-lib"
+      "sb-dashlets": [
+        "dist/sb-dashlets"
       ],
-      "my-lib/*": [
-        "dist/my-lib/*"
+      "sb-dashlets/*": [
+        "dist/sb-dashlets/*"
       ]
     }
   },

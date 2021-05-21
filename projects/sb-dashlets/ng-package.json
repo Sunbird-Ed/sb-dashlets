@@ -1,8 +1,21 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/my-lib",
+  "dest": "../../dist/sb-dashlets",
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": ["ng2-semantic-ui"]
+  "whitelistedNonPeerDependencies": [
+    "ng2-semantic-ui",
+    "chart.js",
+    "ng2-charts",
+    "lodash-es",
+    "datatables.net",
+    "datatables.net-dt",
+    "angular-datatables",
+    "jquery",
+    "@types/datatables.net",
+    "ng-multiselect-dropdown",
+    "ngx-daterangepicker-material",
+    "jsonexport"
+  ]
 }

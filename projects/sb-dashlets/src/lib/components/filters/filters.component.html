@@ -1,0 +1,30 @@
+<ng-container *ngIf="filters?.length && filtersFormGroup">
+    <form [formGroup]="filtersFormGroup">
+        <div class="container">
+            <div class="row">
+                <ng-container *ngFor="let filter of filters">
+                    <ng-container
+                        *ngIf="filter?.controlType === 'multi-select' || filter?.controlType === 'single-select'">
+                        <ng-multiselect-dropdown class="col-2 m-2"
+                            [placeholder]="filter?.placeholder || filter?.displayName || filter?.label"
+                            [settings]="filter?.dropdownSettings" [data]="filter?.options"
+                            [formControlName]="filter.reference">
+                        </ng-multiselect-dropdown>
+                    </ng-container>
+
+                    <ng-container *ngIf="filter?.controlType === 'date'">
+                        <div class="col-2 m-2">
+                            <input type="text"
+                                [placeholder]="filter?.placeholder || filter?.displayName || filter?.label"
+                                ngxDaterangepickerMd [minDate]="filter?.minDate" [maxDate]="filter?.maxDate"
+                                [ranges]="ranges" [alwaysShowCalendars]="true" [locale]="locale"
+                                [linkedCalendars]="true" [showCustomRangeLabel]="true"
+                                (change)="updateDateRange($event,filter.reference, filter?.dateFormat)"
+                                #datePickerForFilters />
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+</ng-container>

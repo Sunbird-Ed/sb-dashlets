@@ -1,0 +1,36 @@
+<ng-template #defaultTemplate let-config>
+  <div class="ui cards">
+    <div class="card">
+      <div class="content">
+        <div class="header">{{config?.inputParameters?.header}}</div>
+        <div class="meta">{{config?.inputParameters?.footer}}</div>
+        <div class="description">
+          {{config?.inputParameters?.data}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #defaultFilterTemplate let-context>
+  <sb-dashlets-filters [data]="context?.data" [config]="context?.config?.filters"
+    (filteredData)="update({data: $event})">
+  </sb-dashlets-filters>
+</ng-template>
+
+<ng-container *ngIf="$context?.config?.filters" [ngTemplateOutlet]="templateRefs?.filter || defaultFilterTemplate"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
+</ng-container>
+
+
+<ng-container *ngIf="templateRefs?.header && $context" [ngTemplateOutlet]="templateRefs?.header"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
+</ng-container>
+
+<ng-container *ngIf="$context" [ngTemplateOutlet]="templateRefs?.body || defaultTemplate"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
+</ng-container>
+
+<ng-container *ngIf="templateRefs?.footer && $context" [ngTemplateOutlet]="templateRefs?.footer"
+  [ngTemplateOutletContext]="{'$implicit': $context}">
+</ng-container>

@@ -37,6 +37,128 @@
           }
         }
       }
+    },
+    "sb-dashlets-showcase": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/sb-dashlets-showcase",
+      "sourceRoot": "projects/sb-dashlets-showcase/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/sb-dashlets-showcase",
+            "index": "projects/sb-dashlets-showcase/src/index.html",
+            "main": "projects/sb-dashlets-showcase/src/main.ts",
+            "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
+            "tsConfig": "projects/sb-dashlets-showcase/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/sb-dashlets-showcase/src/favicon.ico",
+              "projects/sb-dashlets-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/sb-dashlets-showcase/src/styles.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/sb-dashlets-showcase/src/environments/environment.ts",
+                  "with": "projects/sb-dashlets-showcase/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "sb-dashlets-showcase:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "sb-dashlets-showcase:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "sb-dashlets-showcase:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sb-dashlets-showcase/src/test.ts",
+            "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
+            "tsConfig": "projects/sb-dashlets-showcase/tsconfig.spec.json",
+            "karmaConfig": "projects/sb-dashlets-showcase/karma.conf.js",
+            "assets": [
+              "projects/sb-dashlets-showcase/src/favicon.ico",
+              "projects/sb-dashlets-showcase/src/assets"
+            ],
+            "styles": [
+              "projects/sb-dashlets-showcase/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sb-dashlets-showcase/tsconfig.app.json",
+              "projects/sb-dashlets-showcase/tsconfig.spec.json",
+              "projects/sb-dashlets-showcase/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/sb-dashlets-showcase/e2e/protractor.conf.js",
+            "devServerTarget": "sb-dashlets-showcase:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "sb-dashlets-showcase:serve:production"
+            }
+          }
+        }
+      }
     }},
   "defaultProject": "sb-dashlets"
 }

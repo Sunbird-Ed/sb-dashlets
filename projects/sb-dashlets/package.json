@@ -1,6 +1,6 @@
 {
-  "name": "sb-dashlets",
-  "version": "1.0.2",
+  "name": "@project-sunbird/sb-dashlet",
+  "version": "1.0.0",
   "author": "Ravinder Kumar",
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",

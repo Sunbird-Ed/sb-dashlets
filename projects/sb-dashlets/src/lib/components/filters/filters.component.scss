@@ -1,0 +1,19 @@
+.sb-filter-g {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap:0.5rem;
+  &__item {
+    margin-bottom: 0.5rem;
+    display: block;
+    --white: #fff;
+    background-color: var(--white);
+    input {
+      width: 100%;
+    border: 1px solid #adadad;
+    height: 35px;
+    border-radius: 0.25rem;
+    padding-left: 0.75rem;
+    color:#333;
+    }
+  }
+}

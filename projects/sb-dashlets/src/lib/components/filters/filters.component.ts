@@ -40,7 +40,7 @@ export type IFilterConfiguration = IFilterConfig & AdditionalConfig
 @Component({
   selector: 'sb-dashlets-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.css'],
+  styleUrls: ['./filters.component.scss'],
   providers: [{
     provide: DEFAULT_CONFIG,
     useValue: defaultValue

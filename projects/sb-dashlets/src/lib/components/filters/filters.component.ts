@@ -5,7 +5,6 @@ import * as _ from 'lodash-es'
 import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, startWith } from 'rxjs/operators';
 import { Subject, zip } from 'rxjs';
 import { IFilterConfig } from '../../types/index'
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { defaultValue } from './defaultConfiguration';
 import * as momentImported from 'moment'; const moment = momentImported;
 
@@ -59,7 +58,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   public unsubscribe$ = new Subject<void>();
   public ranges = ranges;
   public locale = { applyLabel: 'Set Date', format: 'DD-MM-YYYY' };
-  public dropdownSettings: IDropdownSettings;
+  public dropdownSettings: any;
 
   @ViewChild('datePickerForFilters', { static: false }) datepicker: ElementRef;
 

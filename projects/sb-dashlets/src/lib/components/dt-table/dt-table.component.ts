@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { DataService } from '../../services';
-import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens';
-import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types';
+import { DataService } from '../../services/index';
+import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens/index';
+import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import defaultConfiguration from './defaultConfiguration';
 

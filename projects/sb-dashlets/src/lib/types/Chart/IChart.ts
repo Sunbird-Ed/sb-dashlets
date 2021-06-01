@@ -1,4 +1,3 @@
-import { EventEmitter } from "@angular/core";
 import { IBase } from "../IBase";
 import { IFilterConfig} from '../filter';
 import { ChartType } from './IChartType'

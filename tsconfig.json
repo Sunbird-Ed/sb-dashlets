@@ -26,6 +26,12 @@
       ],
       "sb-dashlets/*": [
         "dist/sb-dashlets/*"
+      ],
+      "@project-sunbird/sb-dashlet": [
+        "dist/sb-dashlets"
+      ],
+      "@project-sunbird/sb-dashlet/*": [
+        "dist/sb-dashlets"
       ]
     }
   },

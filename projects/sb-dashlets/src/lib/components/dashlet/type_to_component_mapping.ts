@@ -1,4 +1,4 @@
-import { ChartType, TableType } from '../../types';
+import { ChartType, TableType } from '../../types/index';
 
 const TYPE_TO_COMPONENT_MAPPING = {
   [ChartType.LINE]: () => import('../chart-js/chart-js.component').then(module => module.ChartJsComponent),

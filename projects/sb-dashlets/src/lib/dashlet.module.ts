@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { DashletComponent, ChartJsComponent, BigNumberComponent, DtTableComponent, FiltersComponent } from './components';
-import { ReportWrapperDirective, TemplateRefsDirective } from './directives';
+import { DashletComponent, ChartJsComponent, BigNumberComponent, DtTableComponent, FiltersComponent } from './components/index';
+import { ReportWrapperDirective, TemplateRefsDirective } from './directives/index';
 import { HttpClientModule } from '@angular/common/http'
 import { ChartsModule, ThemeService } from 'ng2-charts'
 import { CommonModule } from '@angular/common';

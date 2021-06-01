@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
-import { IApiConfig } from '../../types';
+import { IApiConfig } from '../../types/index';
 
 type apiConfig = {
   method: string;

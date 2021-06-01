@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { DataService } from '../../services';
-import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens';
-import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types';
+import { DataService } from '../../services/index';
+import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens/index';
+import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import defaultConfiguration from './defaultConfiguration';
+import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
+
 
 declare var $;
 
@@ -187,6 +189,19 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
         return data[index];
       }
     }
+  }
+
+  // Returns the csv string for the mobile platform
+  exportCsv() {
+    return new Promise((resolve, reject) => {
+      jsonExport(this.data, (error, csv) => {
+        if (csv) {
+          resolve(csv);
+        } else {
+          reject(error);
+        }
+      })
+    })
   }
 
   exportAs(format: string) {

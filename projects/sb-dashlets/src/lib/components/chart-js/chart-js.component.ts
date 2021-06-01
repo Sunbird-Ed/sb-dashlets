@@ -1,11 +1,11 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../../services';
+import { DataService } from '../../services/index';
 import { BaseChartDirective } from 'ng2-charts';
-import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types';
+import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import { IChartOptions, ChartType, UpdateInputParams } from '../../types';
+import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
-import { DEFAULT_CONFIG, DASHLET_CONSTANTS } from '../../tokens';
+import { DEFAULT_CONFIG, DASHLET_CONSTANTS } from '../../tokens/index';
 import defaultConfiguration from './defaultConfiguration'
 
 /**

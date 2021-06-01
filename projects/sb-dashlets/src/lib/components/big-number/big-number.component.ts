@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
-import { DataService } from '../../services';
-import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types';
+import { ChangeDetectorRef, Component, Inject} from '@angular/core';
+import { DataService } from '../../services/index';
+import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS } from '../../tokens';
+import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS } from '../../tokens/index';
 import { runAggregator } from './operations';
 @Component({
   selector: 'sb-big-number',

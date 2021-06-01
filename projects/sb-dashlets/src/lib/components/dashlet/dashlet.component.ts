@@ -1,7 +1,6 @@
-import { Component, ComponentFactoryResolver, ContentChild, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
-import { element } from 'protractor';
-import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives';
-import { CustomEvent, IBase, ReportState } from '../../types';
+import { Component, ComponentFactoryResolver, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives/index';
+import { CustomEvent, IBase, ReportState } from '../../types/index';
 import TYPE_TO_COMPONENT_MAPPING from './type_to_component_mapping';
 import { v4 as uuidv4 } from 'uuid';
 

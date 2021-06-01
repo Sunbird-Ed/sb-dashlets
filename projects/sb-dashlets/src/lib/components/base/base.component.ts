@@ -1,7 +1,7 @@
 import { EventEmitter, TemplateRef } from '@angular/core';
-import { DataService } from '../../services';
+import { DataService } from '../../services/index';
 import { Observable, of } from 'rxjs';
-import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent } from '../../types';
+import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent } from '../../types/index';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;

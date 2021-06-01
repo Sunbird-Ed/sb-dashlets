@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DEFAULT_CONFIG } from '../../tokens';
+import { DEFAULT_CONFIG } from '../../tokens/index';
 import * as _ from 'lodash-es'
 import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, startWith } from 'rxjs/operators';
 import { Subject, zip } from 'rxjs';
-import { IFilterConfig } from '../../types'
+import { IFilterConfig } from '../../types/index'
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { defaultValue } from './defaultConfiguration';
 import * as momentImported from 'moment'; const moment = momentImported;

@@ -17,7 +17,23 @@ declare var $;
   providers: [
     {
       provide: DEFAULT_CONFIG,
-      useValue: defaultConfiguration
+      useValue: {
+        tableLevelConfig: {
+          autoWidth: true,
+          paging: false,
+          bFilter: false,
+          bInfo: false,
+          info: false,
+          searchable: false,
+          bLengthChange: false
+        },
+        columnConfig: {
+          searchable: true,
+          orderable: true,
+          visible: true,
+          autoWidth: true
+        }
+      }
     }
   ]
 })

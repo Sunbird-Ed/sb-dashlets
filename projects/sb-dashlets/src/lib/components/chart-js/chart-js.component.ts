@@ -1,12 +1,12 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from '../../services/index';
-import { BaseChartDirective } from 'ng2-charts';
+import { BaseChartDirective, ThemeService } from 'ng2-charts';
 import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
 import { DEFAULT_CONFIG, DASHLET_CONSTANTS } from '../../tokens/index';
-import defaultConfiguration from './defaultConfiguration'
+import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 
 /**
  * @dynamic
@@ -16,9 +16,10 @@ import defaultConfiguration from './defaultConfiguration'
   templateUrl: './chart-js.component.html',
   styleUrls: ['./chart-js.component.css'],
   providers: [
+    ThemeService,
     {
       provide: DEFAULT_CONFIG,
-      useValue: defaultConfiguration
+      useValue: CHART_DEFAULT_CONFIG
     }
   ]
 })

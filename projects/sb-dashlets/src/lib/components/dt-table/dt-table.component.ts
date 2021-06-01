@@ -4,12 +4,10 @@ import { DataService } from '../../services/index';
 import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens/index';
 import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import defaultConfiguration from './defaultConfiguration';
+import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
 
-
 declare var $;
-
 @Component({
   selector: 'sb-dt-table',
   templateUrl: './dt-table.component.html',
@@ -17,23 +15,7 @@ declare var $;
   providers: [
     {
       provide: DEFAULT_CONFIG,
-      useValue: {
-        tableLevelConfig: {
-          autoWidth: true,
-          paging: false,
-          bFilter: false,
-          bInfo: false,
-          info: false,
-          searchable: false,
-          bLengthChange: false
-        },
-        columnConfig: {
-          searchable: true,
-          orderable: true,
-          visible: true,
-          autoWidth: true
-        }
-      }
+      useValue: TABLE_DEFAULT_CONFIG
     }
   ]
 })
@@ -43,7 +25,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
 
   public reportType: IReportType = IReportType.TABLE;
   public config: object;
-  public _defaultConfig: typeof defaultConfiguration;
+  public _defaultConfig: object;
   public inputParameters = {};
   public exportOptions = ['csv'];
 
@@ -80,7 +62,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   }
 
   private _addDefaultToColumn = column => {
-    return { ...this._defaultConfig.columnConfig, ...column };
+    return { ...this._defaultConfig['columnConfig'], ...column };
   }
 
   builder(config, data) {
@@ -96,7 +78,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
 
   private _setTableOptions(config: object = {}) {
     this.inputParameters = {
-      ...this._defaultConfig.tableLevelConfig,
+      ...this._defaultConfig['tableLevelConfig'],
       ...this.inputParameters,
       ...config
     }

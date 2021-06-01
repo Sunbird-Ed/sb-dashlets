@@ -5,7 +5,7 @@ import * as _ from 'lodash-es'
 import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, startWith } from 'rxjs/operators';
 import { Subject, zip } from 'rxjs';
 import { IFilterConfig } from '../../types/index'
-import { defaultValue } from './defaultConfiguration';
+import { FILTER_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as momentImported from 'moment'; const moment = momentImported;
 
 const ranges: any = {
@@ -42,7 +42,7 @@ export type IFilterConfiguration = IFilterConfig & AdditionalConfig
   styleUrls: ['./filters.component.scss'],
   providers: [{
     provide: DEFAULT_CONFIG,
-    useValue: defaultValue
+    useValue: FILTER_DEFAULT_CONFIG
   }]
 })
 export class FiltersComponent implements OnInit, OnDestroy {
@@ -62,7 +62,6 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
   @ViewChild('datePickerForFilters', { static: false }) datepicker: ElementRef;
 
-
   constructor(private fb: FormBuilder, @Inject(DEFAULT_CONFIG) private defaultConfig) { }
 
   ngOnInit() {
@@ -77,7 +76,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
   private _getFilterOptions(dataExpr: string, data: object[]) {
     const getFilterValue = dataExpr => row => (row && row[dataExpr]) || '';
-    return _.chain(data).map(getFilterValue(dataExpr)).uniq().sortBy().compact().value();
+    const inputDataArr = (data && Array.isArray(data) && data.map(getFilterValue(dataExpr))) || [];
+    return _.compact(_.sortBy(_.uniq(inputDataArr)));
   }
 
   init(config: IFilterConfig[], data: object[]) {

@@ -1,4 +1,4 @@
-export const defaultValue = {
+export const FILTER_DEFAULT_CONFIG = {
     config: {
         controlType: 'multi-select',
         searchable: true,

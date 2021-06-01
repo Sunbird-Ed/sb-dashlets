@@ -1,5 +1,5 @@
 
-const DEFAULT_CONFIG = {
+export const TABLE_DEFAULT_CONFIG = {
   tableLevelConfig: {
     autoWidth: true,
     paging: false,
@@ -16,5 +16,3 @@ const DEFAULT_CONFIG = {
     autoWidth: true
   }
 };
-
-export default DEFAULT_CONFIG;

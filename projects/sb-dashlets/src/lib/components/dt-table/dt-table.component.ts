@@ -6,6 +6,8 @@ import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState 
 import { BaseComponent } from '../base/base.component';
 import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
+import { sortBy } from 'lodash-es';
+
 
 declare var $;
 @Component({
@@ -68,10 +70,11 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   builder(config, data) {
     const { columnConfig, ...others } = config;
     const columns = columnConfig.map(this._addDefaultToColumn);
+    const columnsSortedByIndex = sortBy(columns, ['index']);
     this._setTableOptions({
       ...others,
       data,
-      columns,
+      columns: columnsSortedByIndex,
       rowCallback: this.rowClickHandler.bind(this)
     });
   }
@@ -187,6 +190,10 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
         return data[index];
       }
     }
+  }
+
+  orderAndTransformData(data: object[], keysToPick: string[]) {
+    return data
   }
 
   // Returns the csv string for the mobile platform

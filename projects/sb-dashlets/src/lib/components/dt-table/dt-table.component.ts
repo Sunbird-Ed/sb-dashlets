@@ -6,7 +6,7 @@ import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState 
 import { BaseComponent } from '../base/base.component';
 import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
-import { sortBy } from 'lodash-es';
+import { sortBy, map, get, omitBy } from 'lodash-es';
 
 
 declare var $;
@@ -192,30 +192,41 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     }
   }
 
-  orderAndTransformData(data: object[], keysToPick: string[]) {
-    return data
+  private _getColumnsForStrictMode() {
+    const columnsConfig = get(this.config, 'columnConfig');
+    const columnsSortedByIndex = sortBy(columnsConfig, 'index');
+    const omitHiddenColumns = omitBy(columnsSortedByIndex, col => get(col, 'visible') === false);
+    return omitHiddenColumns;
   }
 
   // Returns the csv string for the mobile platform
-  exportCsv() {
-    return new Promise((resolve, reject) => {
-      jsonExport(this.data, (error, csv) => {
-        if (csv) {
-          resolve(csv);
-        } else {
-          reject(error);
-        }
-      })
-    })
+  async exportCsv(options = {}) {
+    let JSON = await this._dtClosure.getData();
+    if (options && options['strict']) {
+      const columnsConfig = this._getColumnsForStrictMode();
+      const columnsToPick = map(columnsConfig, 'data');
+      const headersMapping = map(columnsConfig, 'title');
+      options['rename'] = headersMapping;
+      JSON = this.sortAndTransformData(JSON || this.data, { columnsToPick });
+    }
+    return this.getCsv((JSON && JSON.toArray()) || this.data, options);
   }
 
-  exportAs(format: string) {
+  async exportAs(format: string, options = {}) {
     if (!this.exportOptions.includes(format)) {
       throw new Error('given type not supported');
     }
+    const data = await this._dtClosure.getData();
     switch (format) {
       case 'csv': {
-        this.exportAsCsv();
+        if (options && options['strict']) {
+          const columnsConfig = this._getColumnsForStrictMode()
+          const headersMapping = map(columnsConfig, 'title');
+          const columnsToPick = map(columnsConfig, 'data');
+          options['rename'] = headersMapping;
+          options['columnsToPick'] = columnsToPick;
+        }
+        this.exportAsCsv(data && data.toArray(), options);
         break;
       }
     }

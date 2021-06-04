@@ -5,6 +5,7 @@ import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams,
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
+import { pick } from 'lodash-es';
 
 export abstract class BaseComponent implements Partial<IBase> {
 
@@ -59,13 +60,39 @@ export abstract class BaseComponent implements Partial<IBase> {
     link.click();
   }
 
-  exportAsCsv(data?: object[]) {
-    jsonExport(data || this.data, (error, csv) => {
-      if (!error && csv) {
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        var url = URL.createObjectURL(blob);
-        this._downloadFile(url, 'data.csv');
-      }
+  getCsv(data, options) {
+    return new Promise((resolve, reject) => {
+      jsonExport(data, options, (error, csv) => {
+        if (!error && csv) {
+          resolve(csv);
+        } else {
+          reject(error);
+        }
+      })
     })
+  }
+
+  async exportAsCsv(data?: object[], options?: Record<string, any>) {
+    const { columnsToPick = [], ...others } = options;
+    const JSON = this.sortAndTransformData(data || this.data, { columnsToPick });
+    try {
+      const csv: any = await this.getCsv(JSON, others);
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var url = URL.createObjectURL(blob);
+      this._downloadFile(url, 'data.csv');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  sortAndTransformData(rows: object[], { columnsToPick = [] }: { columnsToPick: string[] }) {
+    if (!columnsToPick.length) return rows;
+    return rows.map(row => {
+      const defaultValue = columnsToPick.reduce((acc, val) => {
+        acc[val] = undefined;
+        return acc;
+      }, {});
+      return pick({ ...defaultValue, ...row }, columnsToPick);
+    });
   }
 }

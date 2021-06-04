@@ -1,10 +1,8 @@
 
-const DEFAULT_CONFIG = {
+export const CHART_DEFAULT_CONFIG =  {
   labels: [],
   datasets: [],
   legend: true,
   options: {},
   colors: []
 };
-
-export default DEFAULT_CONFIG;

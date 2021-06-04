@@ -4,12 +4,12 @@ import { DataService } from '../../services/index';
 import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens/index';
 import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import defaultConfiguration from './defaultConfiguration';
+import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
+import { sortBy, map, get, omitBy } from 'lodash-es';
 
 
 declare var $;
-
 @Component({
   selector: 'sb-dt-table',
   templateUrl: './dt-table.component.html',
@@ -17,23 +17,7 @@ declare var $;
   providers: [
     {
       provide: DEFAULT_CONFIG,
-      useValue: {
-        tableLevelConfig: {
-          autoWidth: true,
-          paging: false,
-          bFilter: false,
-          bInfo: false,
-          info: false,
-          searchable: false,
-          bLengthChange: false
-        },
-        columnConfig: {
-          searchable: true,
-          orderable: true,
-          visible: true,
-          autoWidth: true
-        }
-      }
+      useValue: TABLE_DEFAULT_CONFIG
     }
   ]
 })
@@ -43,7 +27,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
 
   public reportType: IReportType = IReportType.TABLE;
   public config: object;
-  public _defaultConfig: typeof defaultConfiguration;
+  public _defaultConfig: object;
   public inputParameters = {};
   public exportOptions = ['csv'];
 
@@ -80,23 +64,24 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   }
 
   private _addDefaultToColumn = column => {
-    return { ...this._defaultConfig.columnConfig, ...column };
+    return { ...this._defaultConfig['columnConfig'], ...column };
   }
 
   builder(config, data) {
     const { columnConfig, ...others } = config;
     const columns = columnConfig.map(this._addDefaultToColumn);
+    const columnsSortedByIndex = sortBy(columns, ['index']);
     this._setTableOptions({
       ...others,
       data,
-      columns,
+      columns: columnsSortedByIndex,
       rowCallback: this.rowClickHandler.bind(this)
     });
   }
 
   private _setTableOptions(config: object = {}) {
     this.inputParameters = {
-      ...this._defaultConfig.tableLevelConfig,
+      ...this._defaultConfig['tableLevelConfig'],
       ...this.inputParameters,
       ...config
     }
@@ -207,26 +192,41 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     }
   }
 
-  // Returns the csv string for the mobile platform
-  exportCsv() {
-    return new Promise((resolve, reject) => {
-      jsonExport(this.data, (error, csv) => {
-        if (csv) {
-          resolve(csv);
-        } else {
-          reject(error);
-        }
-      })
-    })
+  private _getColumnsForStrictMode() {
+    const columnsConfig = get(this.config, 'columnConfig');
+    const columnsSortedByIndex = sortBy(columnsConfig, 'index');
+    const omitHiddenColumns = omitBy(columnsSortedByIndex, col => get(col, 'visible') === false);
+    return omitHiddenColumns;
   }
 
-  exportAs(format: string) {
+  // Returns the csv string for the mobile platform
+  async exportCsv(options = {}) {
+    let JSON = await this._dtClosure.getData();
+    if (options && options['strict']) {
+      const columnsConfig = this._getColumnsForStrictMode();
+      const columnsToPick = map(columnsConfig, 'data');
+      const headersMapping = map(columnsConfig, 'title');
+      options['rename'] = headersMapping;
+      JSON = this.sortAndTransformData(JSON || this.data, { columnsToPick });
+    }
+    return this.getCsv((JSON && JSON.toArray()) || this.data, options);
+  }
+
+  async exportAs(format: string, options = {}) {
     if (!this.exportOptions.includes(format)) {
       throw new Error('given type not supported');
     }
+    const data = await this._dtClosure.getData();
     switch (format) {
       case 'csv': {
-        this.exportAsCsv();
+        if (options && options['strict']) {
+          const columnsConfig = this._getColumnsForStrictMode()
+          const headersMapping = map(columnsConfig, 'title');
+          const columnsToPick = map(columnsConfig, 'data');
+          options['rename'] = headersMapping;
+          options['columnsToPick'] = columnsToPick;
+        }
+        this.exportAsCsv(data && data.toArray(), options);
         break;
       }
     }

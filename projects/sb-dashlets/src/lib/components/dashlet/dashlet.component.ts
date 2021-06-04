@@ -1,9 +1,8 @@
 import { Component, ComponentFactoryResolver, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
 import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives/index';
 import { CustomEvent, IBase, ReportState } from '../../types/index';
-import TYPE_TO_COMPONENT_MAPPING from './type_to_component_mapping';
+import { TYPE_TO_COMPONENT_MAPPING } from './type_to_component_mapping';
 import { v4 as uuidv4 } from 'uuid';
-
 
 type componentInstanceType = Pick<IBase, "initialize" | "events" | "state" | "id">;
 

@@ -73,7 +73,7 @@ export abstract class BaseComponent implements Partial<IBase> {
   }
 
   async exportAsCsv(data?: object[], options?: Record<string, any>) {
-    const { columnsToPick = [], ...others } = options;
+    const { columnsToPick = [], ...others } = options || {};
     const JSON = this.sortAndTransformData(data || this.data, { columnsToPick });
     try {
       const csv: any = await this.getCsv(JSON, others);

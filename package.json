@@ -20,8 +20,6 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "@ngx-translate/core": "^13.0.0",
-    "@ngx-translate/http-loader": "^6.0.0",
     "@project-sunbird/sb-styles": "0.0.7",
     "angular-datatables": "8.1.0",
     "chart.js": "^2.9.4",

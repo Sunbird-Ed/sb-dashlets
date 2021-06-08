@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Renderer } from '@angular/core';
+import { AfterViewInit, Component, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { data } from './data';
 
@@ -158,13 +158,13 @@ export class AppComponent implements AfterViewInit {
     ]
   }
 
-  constructor(private renderer: Renderer) { }
+  constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
-    this.renderer.listenGlobal('document', 'click', (event) => {
-      if (event.target.hasAttribute("data")) {
+    this.renderer.listen('document', 'click', (event) => {
+    if (event.target.hasAttribute("data")) {
         // do something with the data
-      }
-    });
+    }
+});
   }
 }

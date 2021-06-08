@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "projects/sb-dashlets/tsconfig.lib.json",
             "project": "projects/sb-dashlets/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sb-dashlets/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -53,7 +58,7 @@
             "main": "projects/sb-dashlets-showcase/src/main.ts",
             "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
             "tsConfig": "projects/sb-dashlets-showcase/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/sb-dashlets-showcase/src/favicon.ico",
               "projects/sb-dashlets-showcase/src/assets"
@@ -80,7 +85,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -159,6 +163,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sb-dashlets"
+    }
+  },
+  "defaultProject": "sb-dashlets",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -31,7 +31,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
   public inputParameters = {};
   public exportOptions = ['csv'];
 
-  @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
+  @ViewChild(DataTableDirective) dataTableElement: DataTableDirective;
 
   constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);

@@ -25,7 +25,7 @@ import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 })
 export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy {
 
-  @ViewChild(BaseChartDirective, { static: false }) baseChartDirective: BaseChartDirective;
+  @ViewChild(BaseChartDirective) baseChartDirective: BaseChartDirective;
   readonly reportType: IReportType = IReportType.CHART;
 
   public _defaultConfig: Partial<IChartOptions>;

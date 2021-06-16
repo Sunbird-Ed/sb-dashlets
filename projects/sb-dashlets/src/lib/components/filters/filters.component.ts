@@ -60,7 +60,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   public locale = { applyLabel: 'Set Date', format: 'DD-MM-YYYY' };
   public dropdownSettings: any;
 
-  @ViewChild('datePickerForFilters', { static: false }) datepicker: ElementRef;
+  @ViewChild('datePickerForFilters') datepicker: ElementRef;
 
   constructor(private fb: FormBuilder, @Inject(DEFAULT_CONFIG) private defaultConfig) { }
 

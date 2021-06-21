@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DashletComponent, ChartJsComponent, BigNumberComponent, DtTableComponent, FiltersComponent } from './components/index';
+import { DashletComponent, ChartJsComponent, BigNumberComponent, DtTableComponent, FiltersComponent, MapComponent } from './components/index';
 import { ReportWrapperDirective, TemplateRefsDirective } from './directives/index';
 import { HttpClientModule } from '@angular/common/http'
 import { ChartsModule } from 'ng2-charts'
@@ -10,7 +10,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
-  declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent],
+  declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent, MapComponent],
   imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule, NgxDaterangepickerMd.forRoot()],
   exports: [DashletComponent, TemplateRefsDirective],
   entryComponents: [ChartJsComponent, BigNumberComponent, DtTableComponent]

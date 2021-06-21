@@ -10,5 +10,6 @@ export enum ChartType {
   AREA = "area",
   HORIZONTAL_BAR = "bar",
   VERTICAL_BAR = "verticalBar",
-  BIG_NUMBER = "bigNumber"
+  BIG_NUMBER = "bigNumber",
+  MAP = "map"
 }

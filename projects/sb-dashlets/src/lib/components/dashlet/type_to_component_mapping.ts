@@ -11,5 +11,6 @@ export const TYPE_TO_COMPONENT_MAPPING = {
   [ChartType.SCATTER]: () => import('../chart-js/chart-js.component').then(module => module.ChartJsComponent),
   [ChartType.DOUGHNUT]: () => import('../chart-js/chart-js.component').then(module => module.ChartJsComponent),
   [ChartType.BIG_NUMBER]: () => import('../big-number/big-number.component').then(module => module.BigNumberComponent),
-  [TableType.TABLE]: () => import('../dt-table/dt-table.component').then(module => module.DtTableComponent)
+  [TableType.TABLE]: () => import('../dt-table/dt-table.component').then(module => module.DtTableComponent),
+  [ChartType.MAP]: () => import('../map/map.component').then(module => module.MapComponent),
 };

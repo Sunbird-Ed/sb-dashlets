@@ -8,7 +8,10 @@
         "Content Plays from old devices": "13584",
         "Old Devices": "2551",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "01-05-2021",
+        "dateFormat1": "01/05/2021"
     },
     {
         "District": "Allahabad",
@@ -19,7 +22,10 @@
         "Content Plays from old devices": "5962",
         "Old Devices": "1054",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "02-05-2021",
+        "dateFormat1": "02/05/2021"
     },
     {
         "District": "Aligarh",
@@ -30,7 +36,10 @@
         "Content Plays from old devices": "5178",
         "Old Devices": "766",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "03-05-2021",
+        "dateFormat1": "03/05/2021"
     },
     {
         "District": "Azamgarh",
@@ -41,7 +50,10 @@
         "Content Plays from old devices": "4212",
         "Old Devices": "663",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "04-05-2021",
+        "dateFormat1": "04/05/2021"
     },
     {
         "District": "Jaunpur",
@@ -52,7 +64,10 @@
         "Content Plays from old devices": "4060",
         "Old Devices": "705",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "05-05-2021",
+        "dateFormat1": "05/05/2021"
     },
     {
         "District": "Bijnor",
@@ -63,7 +78,10 @@
         "Content Plays from old devices": "3705",
         "Old Devices": "610",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "06-05-2021",
+        "dateFormat1": "06/05/2021"
     },
     {
         "District": "Kanpur Nagar",
@@ -74,7 +92,10 @@
         "Content Plays from old devices": "3145",
         "Old Devices": "549",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "07-05-2021",
+        "dateFormat1": "07/05/2021"
     },
     {
         "District": "Ghaziabad",
@@ -85,7 +106,10 @@
         "Content Plays from old devices": "3203",
         "Old Devices": "375",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "08-05-2021",
+        "dateFormat1": "08/05/2021"
     },
     {
         "District": "Ghazipur",
@@ -96,7 +120,10 @@
         "Content Plays from old devices": "3375",
         "Old Devices": "597",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "09-05-2021",
+        "dateFormat1": "09/05/2021"
     },
     {
         "District": "Lakhimpur",
@@ -107,7 +134,10 @@
         "Content Plays from old devices": "3373",
         "Old Devices": "651",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "10-04-2021",
+        "dateFormat1": "10/04/2021"
     },
     {
         "District": "Agra",
@@ -118,7 +148,10 @@
         "Content Plays from old devices": "2614",
         "Old Devices": "351",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "11-05-2021",
+        "dateFormat1": "11/05/2021"
     },
     {
         "District": "Farrukhabad",
@@ -129,7 +162,10 @@
         "Content Plays from old devices": "3008",
         "Old Devices": "462",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "12-05-2021",
+        "dateFormat1": "12/05/2021"
     },
     {
         "District": "Bulandshehr",
@@ -140,7 +176,10 @@
         "Content Plays from old devices": "2811",
         "Old Devices": "515",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "13-03-2021",
+        "dateFormat1": "13/03/2021"
     },
     {
         "District": "Mathura",
@@ -151,7 +190,10 @@
         "Content Plays from old devices": "2558",
         "Old Devices": "370",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "14-05-2021",
+        "dateFormat1": "14/05/2021"
     },
     {
         "District": "Varanasi",
@@ -162,7 +204,10 @@
         "Content Plays from old devices": "2576",
         "Old Devices": "457",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "15-05-2021",
+        "dateFormat1": "15/05/2021"
     },
     {
         "District": "Ballia",
@@ -173,7 +218,10 @@
         "Content Plays from old devices": "2561",
         "Old Devices": "418",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "16-05-2021",
+        "dateFormat1": "16/05/2021"
     },
     {
         "District": "Fatehpur",
@@ -184,7 +232,10 @@
         "Content Plays from old devices": "2595",
         "Old Devices": "449",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "17-05-2021",
+        "dateFormat1": "17/05/2021"
     },
     {
         "District": "Unnao",
@@ -195,7 +246,10 @@
         "Content Plays from old devices": "2117",
         "Old Devices": "354",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "18-05-2021",
+        "dateFormat1": "18/05/2021"
     },
     {
         "District": "Gautam Buddh Nagar",
@@ -206,7 +260,10 @@
         "Content Plays from old devices": "2223",
         "Old Devices": "229",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "19-05-2021",
+        "dateFormat1": "19/05/2021"
     },
     {
         "District": "Ambedkar Nagar",
@@ -217,7 +274,10 @@
         "Content Plays from old devices": "1747",
         "Old Devices": "283",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "app",
+        "dateFormat": "20-05-2021",
+        "dateFormat1": "20/05/2021"
     },
     {
         "District": "Saharanpur",
@@ -228,7 +288,10 @@
         "Content Plays from old devices": "2151",
         "Old Devices": "377",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "app",
+        "dateFormat": "21-05-2021",
+        "dateFormat1": "21/05/2021"
     },
     {
         "District": "Bareilly",
@@ -239,6 +302,9 @@
         "Content Plays from old devices": "2068",
         "Old Devices": "445",
         "Goal of content plays": "2519",
-        "Goal of Devices": "405"
+        "Goal of Devices": "405",
+        "type": "portal",
+        "dateFormat": "22-05-2021",
+        "dateFormat1": "22/05/2021"
     }
 ]

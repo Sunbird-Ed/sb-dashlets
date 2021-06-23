@@ -1,15 +1,15 @@
-import { EventEmitter, TemplateRef } from '@angular/core';
-import { DataService } from '../../services/index';
+import { EventEmitter, Inject, TemplateRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent } from '../../types/index';
+import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent, IDataService } from '../../types/index';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
 import { pick } from 'lodash-es';
+import { DATA_SERVICE } from '../../tokens/index';
 
 export abstract class BaseComponent implements Partial<IBase> {
 
-  constructor(protected dataService: DataService) { }
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService) { }
 
   id: string;
   templateRefs: Record<string, TemplateRef<any>>;

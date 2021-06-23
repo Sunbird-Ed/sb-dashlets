@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, Inject } from '@angular/core';
-import { DataService } from '../../services/index';
-import { IReportType, InputParams, Properties, IGeoJSON, ICustomMapObj, ChartType, UpdateInputParams, StringObject, ReportState, IMapConfig } from '../../types/index';
+import { IReportType, InputParams, Properties, IGeoJSON, ICustomMapObj, ChartType, UpdateInputParams, StringObject, ReportState, IMapConfig, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS } from '../../tokens/index';
+import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { __defaultConfig } from './defaultConfiguration';
 import { cloneDeep, toLower, find, groupBy, reduce } from 'lodash-es';
 import * as geoJSONMapping from './geoJSONDataMapping.json'
@@ -38,7 +37,7 @@ export class MapComponent extends BaseComponent implements AfterViewInit {
   private getGeoJSON = new BehaviorSubject(undefined);
   private mapClosure;
 
-  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this.mappingConfig = (geoJSONMapping as any).default;
     this._defaultConfig = defaultConfig;

@@ -10,7 +10,7 @@ import {DashletModule} from 'sb-dashlets'
   ],
   imports: [
     BrowserModule,
-    DashletModule
+    DashletModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

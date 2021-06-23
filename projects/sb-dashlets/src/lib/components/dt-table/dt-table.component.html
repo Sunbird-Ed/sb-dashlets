@@ -12,7 +12,9 @@
   [ngTemplateOutletContext]="{'$implicit': $context}">
 </ng-container>
 
-<table datatable [dtOptions]="$context?.inputParameters" class="row-border hover"></table>
+<ng-container *ngIf="$context?.inputParameters">
+  <table datatable [dtOptions]="$context?.inputParameters" class="row-border hover"></table>
+</ng-container>
 
 <ng-container *ngIf="templateRefs?.footer && $context" [ngTemplateOutlet]="templateRefs?.footer"
   [ngTemplateOutletContext]="{'$implicit': $context}">

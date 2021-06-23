@@ -11,8 +11,10 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent, MapComponent],
-  imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule, NgxDaterangepickerMd.forRoot()],
+  imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule,
+    NgxDaterangepickerMd.forRoot(),
+  ],
   exports: [DashletComponent, TemplateRefsDirective],
-  entryComponents: [ChartJsComponent, BigNumberComponent, DtTableComponent]
+  entryComponents: [ChartJsComponent, BigNumberComponent, DtTableComponent, MapComponent]
 })
 export class DashletModule { }

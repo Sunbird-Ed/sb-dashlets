@@ -333,13 +333,6 @@ export class MapComponent extends BaseComponent implements AfterViewInit {
   }
 
   private getGeoJSONFile({ folder = 'geoJSONFiles', fileName }: Record<string, string>): Observable<IGeoJSON> {
-    return this.dataService.fetchData({ method: 'GET', url: `/reports/fetch/${folder}/${fileName}`, options: {} })
-      .pipe(
-        pluck('result'),
-        retry(2),
-        catchError(err => throwError({ errorText: 'Failed to download geoJSON file.' }))
-      );
+    return this.dataService.fetchGeoJSONFile(`${folder}/${fileName}`);
   }
-
-
 }

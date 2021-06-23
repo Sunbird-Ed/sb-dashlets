@@ -1,14 +1,15 @@
 import { Type } from "@angular/core";
 import { IApiConfig } from "./IBase";
 
-type apiConfig = {
+type ApiConfig = {
     method: string;
     url: string;
     options: Partial<IApiConfig>
 }
 
 export interface IDataService {
-    fetchData(config: apiConfig)
+    fetchData(config: ApiConfig);
+    fetchGeoJSONFile(path: string);
 }
 
 export interface IDashletsConfig {

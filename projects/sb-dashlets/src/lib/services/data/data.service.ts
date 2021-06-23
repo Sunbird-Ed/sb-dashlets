@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { of, throwError } from 'rxjs';
+import { catchError, pluck, retry, tap } from 'rxjs/operators';
 import { IApiConfig, IDataService } from '../../types/index';
 
 type apiConfig = {
@@ -16,6 +16,12 @@ export class DataService implements IDataService {
 
   private cachedData = new Map();
 
+  /**
+   * @description fetches the dataSources using the api configuration
+   * @param {apiConfig} config
+   * @return {*} 
+   * @memberof DataService
+   */
   fetchData(config: apiConfig) {
     const stringifiedConfig = JSON.stringify(config);
     if (this.cachedData.has(stringifiedConfig)) return of(this.cachedData.get(stringifiedConfig));
@@ -25,5 +31,19 @@ export class DataService implements IDataService {
         this.cachedData.set(stringifiedConfig, response);
       })
     );
+  }
+  /**
+   * @description method is used to fetch the geoJSON files. Can be overridden by the client to use the necessary endpoint
+   * @param {string} path
+   * @return {*} 
+   * @memberof DataService
+   */
+  fetchGeoJSONFile(path: string) {
+    return this.fetchData({ method: 'GET', url: `/reports/fetch/${path}`, options: {} })
+      .pipe(
+        pluck('result'),
+        retry(2),
+        catchError(err => throwError({ errorText: 'Failed to download geoJSON file.' }))
+      );
   }
 }

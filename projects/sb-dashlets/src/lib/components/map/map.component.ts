@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { IReportType, InputParams, Properties, IGeoJSON, ICustomMapObj, ChartType, UpdateInputParams, StringObject, ReportState, IMapConfig, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
@@ -24,7 +24,7 @@ declare var L;
     }
   ]
 })
-export class MapComponent extends BaseComponent implements AfterViewInit {
+export class MapComponent extends BaseComponent {
 
   public config: any;
   public reportType: IReportType = IReportType.CHART;
@@ -37,17 +37,18 @@ export class MapComponent extends BaseComponent implements AfterViewInit {
   private getGeoJSON = new BehaviorSubject(undefined);
   private mapClosure;
 
-  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
-    super(dataService);
-    this.mappingConfig = (geoJSONMapping as any).default;
-    this._defaultConfig = defaultConfig;
-  }
-
-  ngAfterViewInit() {
+  @ViewChild('map') set mapContainer(element: ElementRef | null) {
+    if (!element) return;
     if (this.inputParameters) {
       this.mapClosure = this._mapClosure(this.inputParameters);
       this.getGeoJSON.next({ ...this.inputParameters, reportData: this.data });
     }
+  }
+
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+    super(dataService);
+    this.mappingConfig = (geoJSONMapping as any).default;
+    this._defaultConfig = defaultConfig;
   }
 
   async initialize({ config, data, type = ChartType.MAP }: InputParams): Promise<any> {
@@ -95,6 +96,9 @@ export class MapComponent extends BaseComponent implements AfterViewInit {
           const bounds = geoJSONLayer.getBounds();
           map.fitBounds(bounds);
         }
+      },
+      resetLayers() {
+        geoJSONLayer && geoJSONLayer.clearLayers();
       },
       updatePropertiesInsideInfoControl(properties) {
         controlObject && controlObject.update(properties);
@@ -160,7 +164,16 @@ export class MapComponent extends BaseComponent implements AfterViewInit {
   }
 
   update(input: Partial<UpdateInputParams>) {
-    throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
+    this.checkIfInitialized();
+    if (!input) throw new Error(this.CONSTANTS.INVALID_INPUT);
+    if (this.mapClosure) {
+      const { data = null, config = {} } = input;
+      this._setMapOptions(config);
+      if (this.inputParameters && data) {
+        this.mapClosure.resetLayers();
+        this.getGeoJSON.next({ ...this.inputParameters, strict: true, reportData: data });
+      }
+    }
   }
 
   addData(data: object | object[]) {

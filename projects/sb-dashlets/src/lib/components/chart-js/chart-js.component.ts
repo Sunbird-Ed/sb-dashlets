@@ -127,7 +127,9 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   }
 
   destroy(): void {
-    this.baseChartDirective.chart.destroy();
+    if (get(this.baseChartDirective, 'chart.destroy')) {
+      this.baseChartDirective.chart.destroy();
+    }
   }
 
   ngOnDestroy() {
@@ -152,7 +154,9 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       ({ labels, datasets } = this._labelsAndDatasetsClosure.getData(data));
     }
     this.setChartData({ ...config, ...(type && { type }), ...(labels && datasets && { labels, datasets }) });
-    this.baseChartDirective.update();
+    if (get(this.baseChartDirective, 'update')) {
+      this.baseChartDirective.update();
+    }
   }
 
   addData(data: object[] | object) {

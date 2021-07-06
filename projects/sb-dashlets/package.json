@@ -19,7 +19,7 @@
     "jquery": "3.4.1",
     "@types/datatables.net": "1.10.19",
     "ng-multiselect-dropdown": "0.3.4",
-    "ngx-daterangepicker-material": "4.0.1",
+    "ngx-daterangepicker-material": "5.0.0",
     "jsonexport": "3.2.0"
   },
   "keywords": [

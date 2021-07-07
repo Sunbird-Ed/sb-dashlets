@@ -26,5 +26,6 @@ export const schema = Joi.object({
         }).required().options({ allowUnknown: true })
     }).optional().options({ allowUnknown: true }),
     rootStyle: Joi.object().optional(),
-    filters: filterSchema.optional()
+    filters: filterSchema.optional(),
+    omitMetrics: Joi.array().items(...[Joi.string()]).optional()
 }).xor("state", "country").xor("districts", "states").and("state", "districts").and("country", "states");

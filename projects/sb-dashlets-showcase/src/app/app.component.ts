@@ -192,7 +192,8 @@ export class AppComponent implements AfterViewInit {
       "Bareilly"
     ],
     "labelExpr": "District",
-    "controlTitle": "Tamil Nadu Weekly Usage"
+    "controlTitle": "Tamil Nadu Weekly Usage",
+    "omitMetrics": ["st_code", "code"]
   }
 
   constructor(private renderer: Renderer2) { }

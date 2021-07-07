@@ -3,9 +3,9 @@ import { IReportType, InputParams, Properties, IGeoJSON, ICustomMapObj, ChartTyp
 import { BaseComponent } from '../base/base.component';
 import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { __defaultConfig } from './defaultConfiguration';
-import { cloneDeep, toLower, find, groupBy, reduce } from 'lodash-es';
+import { cloneDeep, toLower, find, groupBy, reduce, omit } from 'lodash-es';
 import * as geoJSONMapping from './geoJSONDataMapping.json'
-import { catchError, pluck, retry, skipWhile, tap, map, switchMap } from 'rxjs/operators';
+import { catchError, skipWhile, tap, map, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 
 declare var L;
@@ -117,7 +117,7 @@ export class MapComponent extends BaseComponent {
     this.getGeoJSON.pipe(
       skipWhile(input => input === undefined || input === null || !(input.hasOwnProperty('state') || input.hasOwnProperty('country'))),
       switchMap(input => {
-        const { country, states, state, districts, metrics, labelExpr, strict, folder, reportData = [] } = input;
+        const { country, states, state, districts, metrics, labelExpr, strict, folder, reportData = [], omitMetrics = [] } = input;
         let paramter;
         if (country) {
           paramter = { type: 'country', name: country };
@@ -133,9 +133,9 @@ export class MapComponent extends BaseComponent {
             const { type, features = [] } = cloneDeep(geoJSONData) as IGeoJSON;
             let filteredFeatures;
             if (country && states.length) {
-              filteredFeatures = this.addProperties({ reportData, layers: states, labelExpr, type: 'state', features, metrics });
+              filteredFeatures = this.addProperties({ reportData, layers: states, labelExpr, type: 'state', features, metrics, omitMetrics });
             } else {
-              filteredFeatures = this.addProperties({ reportData, layers: districts, labelExpr, type: 'district', features, metrics });
+              filteredFeatures = this.addProperties({ reportData, layers: districts, labelExpr, type: 'district', features, metrics, omitMetrics });
             }
             return { type, features: strict ? filteredFeatures : features };
           },
@@ -309,7 +309,7 @@ export class MapComponent extends BaseComponent {
  * @returns
  * @memberof MapComponent
  */
-  private addProperties({ reportData = [], layers = [], labelExpr = 'District', type = 'district', features = [], metrics = [] }) {
+  private addProperties({ reportData = [], layers = [], labelExpr = 'District', type = 'district', features = [], metrics = [], omitMetrics = [] }) {
     const filteredFeatures = [];
     const datasets = groupBy(reportData || [], data => toLower(data[labelExpr]));
     layers.forEach(layer => {
@@ -327,10 +327,10 @@ export class MapComponent extends BaseComponent {
         });
         return accumulator;
       }, {});
-      featureObj.properties = {
+      featureObj.properties = omit({
         ...(featureObj.properties || {}),
         ...(result || {})
-      };
+      }, omitMetrics);
       filteredFeatures.push(featureObj);
     });
     return filteredFeatures;

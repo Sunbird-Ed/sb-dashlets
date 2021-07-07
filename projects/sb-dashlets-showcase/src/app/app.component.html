@@ -12,7 +12,7 @@
       </sb-dashlet>
     </div>
     <div class="col-sm mt-5">
-      <sb-dashlet [type]="'bar'" [data]="data" [config]="config2">
+      <sb-dashlet [type]="'horizontalBar'" [data]="data" [config]="config2">
         <ng-template sbTemplateRef="footer" let-config>
           <div class="btn-group btn-group-sm float-end" role="group" aria-label="Basic mixed styles example">
             <button (click)="lib2?.instance?.exportAs(option)" type="button"

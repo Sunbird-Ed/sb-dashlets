@@ -48,5 +48,9 @@ export const TYPE_TO_COMPONENT_MAPPING = {
   [ChartType.MAP]: {
     componentPath: import('../map/map.component').then(module => module.MapComponent),
     schemaPath: import("../map/schema").then(module => module.schema)
-  }
+  },
+  [ChartType.HORIZONTAL_Bar]: {
+    componentPath: import('../chart-js/chart-js.component').then(module => module.ChartJsComponent),
+    schemaPath: import("../chart-js/schema").then(module => module.schema)
+  },
 };

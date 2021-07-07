@@ -1,5 +1,5 @@
 import { IBase } from "../IBase";
-import { IFilterConfig} from '../filter';
+import { IFilterConfig } from '../filter';
 import { ChartType } from './IChartType'
 
 export interface IChartBase extends IBase {
@@ -35,6 +35,7 @@ export type IChartOptions = {
   filters: IFilterConfig;
   responsive: boolean;
   type: string;
+  options: object,
   scales: {
     axes: any;
     [key: string]: any;

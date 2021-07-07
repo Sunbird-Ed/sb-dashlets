@@ -20,7 +20,8 @@
     "@types/datatables.net": "1.10.19",
     "ng-multiselect-dropdown": "0.3.4",
     "ngx-daterangepicker-material": "5.0.0",
-    "jsonexport": "3.2.0"
+    "jsonexport": "3.2.0",
+    "joi": "17.4.0"
   },
   "keywords": [
     "dashlets",

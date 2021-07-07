@@ -52,9 +52,9 @@ export class DashletComponent implements OnInit {
   }
 
   async loadComponent(type: string) {
-    const { path, schema } = this._typeToComponentMapping[type];
-    if (!(path)) { throw new Error('Given Type not supported'); }
-    const component = await path;
+    const { componentPath, schemaPath } = this._typeToComponentMapping[type];
+    if (!(componentPath)) { throw new Error('Given Type not supported'); }
+    const component = await componentPath;
     this.reportWrapper.viewContainerRef.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory<componentInstanceType>(component);
     const componentRef = this.reportWrapper.viewContainerRef.createComponent(componentFactory);

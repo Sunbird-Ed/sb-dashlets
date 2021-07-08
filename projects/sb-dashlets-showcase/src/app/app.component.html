@@ -9,17 +9,10 @@
   <div class="row">
     <div class="col-sm mt-5">
       <sb-dashlet [type]="type" [data]="data" [config]="config2" #lib2>
-        <ng-template sbTemplateRef="header" let-config>
-          <div class="btn-group btn-group-sm float-end" role="group" aria-label="Basic mixed styles example">
-            <button (click)="lib2?.instance?.exportAs(option)" type="button"
-              *ngFor="let option of config?.exportOptions" class="btn btn-outline-success">{{option |
-              titlecase}}</button>
-          </div>
-        </ng-template>
       </sb-dashlet>
     </div>
     <div class="col-sm mt-5">
-      <sb-dashlet [type]="'bar'" [data]="data" [config]="config2">
+      <sb-dashlet [type]="'horizontalBar'" [data]="data" [config]="config2">
         <ng-template sbTemplateRef="footer" let-config>
           <div class="btn-group btn-group-sm float-end" role="group" aria-label="Basic mixed styles example">
             <button (click)="lib2?.instance?.exportAs(option)" type="button"
@@ -77,10 +70,6 @@
             <button type="button" *ngFor="let option of config?.exportOptions" class="btn btn-outline-primary float-end"
               (click)="lib?.instance?.exportAs(option)">{{option | titlecase}}</button>
           </div>
-
-          <!-- <div class="alert alert-secondary" role="alert">
-            A simple Header. Check this Out !!!
-          </div> -->
         </ng-template>
 
         <ng-template sbTemplateRef="footer" let-config>
@@ -90,5 +79,10 @@
         </ng-template>
       </sb-dashlet>
     </div>
+  </div>
+
+  <div class="row mt-5">
+    <sb-dashlet [type]="'map'" [data]="data" [config]="mapData" #lib>
+    </sb-dashlet>
   </div>
 </div>

@@ -7,7 +7,5 @@ interface ITableBase extends IBase {
 }
 
 export interface ITable extends ITableBase {
-
     addData(data: object | object[]);
-
 }

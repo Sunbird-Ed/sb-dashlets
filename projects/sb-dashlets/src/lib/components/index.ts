@@ -9,3 +9,4 @@ export * from './chart-js/defaultConfiguration';
 export * from './dashlet/type_to_component_mapping';
 export * from './dt-table/defaultConfiguration';
 export * from './filters/defaultConfiguration';
+export * from './map/map.component';

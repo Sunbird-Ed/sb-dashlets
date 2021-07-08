@@ -8,7 +8,8 @@ export enum ChartType {
   BUBBLE = "bubble",
   SCATTER = "scatter",
   AREA = "area",
-  HORIZONTAL_BAR = "bar",
   VERTICAL_BAR = "verticalBar",
-  BIG_NUMBER = "bigNumber"
+  BIG_NUMBER = "bigNumber",
+  MAP = "map",
+  HORIZONTAL_Bar = "horizontalBar"
 }

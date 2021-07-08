@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, Inject} from '@angular/core';
-import { DataService } from '../../services/index';
-import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState } from '../../types/index';
+import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
-import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS } from '../../tokens/index';
+import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { runAggregator } from './operations';
 @Component({
   selector: 'sb-big-number',
@@ -30,7 +29,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
   private _bigNumberClosure: any;
 
-  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this._defaultConfig = defaultConfig;
   }

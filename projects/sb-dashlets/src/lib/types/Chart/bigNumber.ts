@@ -6,7 +6,7 @@ export interface IBigNumberConfig {
   header?: string;
   footer?: string;
   dataExpr?: string;
-  data?: number | string;
+  // data?: number | string;
   operation?: IBigNumberOperations;
 }
 

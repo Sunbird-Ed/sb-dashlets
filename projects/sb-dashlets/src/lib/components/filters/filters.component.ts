@@ -6,20 +6,22 @@ import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, star
 import { Subject, zip } from 'rxjs';
 import { IFilterConfig } from '../../types/index'
 import { FILTER_DEFAULT_CONFIG } from './defaultConfiguration';
-import * as momentImported from 'moment'; const moment = momentImported;
+import * as dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat)
 
 const ranges: any = {
-  'Today': [moment(), moment()],
-  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-  'This Month': [moment().startOf('month'), moment().endOf('month')],
-  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+  'Today': [dayjs(), dayjs()],
+  'Yesterday': [dayjs().subtract(1, 'day'), dayjs().subtract(1, 'day')],
+  'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
+  'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+  'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
+  'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
 };
 
 const sortDates = (dates: string[], format = 'DD-MM-YYYY') => {
   return dates.sort((pre, next) => {
-    const preDate = moment(pre, format), nextDate = moment(next, format);
+    const preDate = dayjs(pre, format), nextDate = dayjs(next, format);
     if (preDate.isSame(nextDate)) return 0;
     if (preDate.isBefore(nextDate)) return -1;
     return 1;
@@ -89,8 +91,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
       const options = this._getFilterOptions(reference, data);
       if (filter.controlType === 'date' || /date/i.test(reference)) {
         const sortedDateRange = sortDates([...options], dateFormat);
-        filterObj['minDate'] = moment(sortedDateRange[0], dateFormat);
-        filterObj['maxDate'] = moment(sortedDateRange[sortedDateRange.length - 1], dateFormat);
+        filterObj['minDate'] = dayjs(sortedDateRange[0], dateFormat);
+        filterObj['maxDate'] = dayjs(sortedDateRange[sortedDateRange.length - 1], dateFormat);
       } else {
         filterObj['dropdownSettings'] = this._setDropdownSettings({
           singleSelection: controlType === 'single-select' ? true : false,
@@ -142,8 +144,8 @@ export class FiltersComponent implements OnInit, OnDestroy {
             filter.options = options;
             if (filter.controlType === 'date' || /date/i.test(reference)) {
               const sortedDateRange = sortDates([...options], 'DD-MM-YYYY');
-              filter['minDate'] = moment(sortedDateRange[0], 'DD-MM-YYYY');
-              filter['maxDate'] = moment(sortedDateRange[sortedDateRange.length - 1], 'DD-MM-YYYY');
+              filter['minDate'] = dayjs(sortedDateRange[0], 'DD-MM-YYYY');
+              filter['maxDate'] = dayjs(sortedDateRange[sortedDateRange.length - 1], 'DD-MM-YYYY');
             }
           }
         })
@@ -168,13 +170,14 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   updateDateRange({ startDate, endDate }, columnRef, dateFormat) {
-    const selectedStartDate = moment(startDate).subtract(1, 'day');
-    const selectedEndDate = moment(endDate).add(1, 'day');
+    const selectedStartDate = dayjs(startDate).subtract(1, 'day');
+    const selectedEndDate = dayjs(endDate).add(1, 'day');
     const dateRange = [];
-    const currDate = moment(selectedStartDate).startOf('day');
-    const lastDate = moment(selectedEndDate).startOf('day');
-    while (currDate.add(1, 'days').diff(lastDate) < 0) {
+    let currDate = dayjs(selectedStartDate).startOf('day');
+    const lastDate = dayjs(selectedEndDate).startOf('day');
+    while (currDate.diff(lastDate) < 0) {
       dateRange.push(currDate.clone().format(dateFormat));
+      currDate = currDate.add(1, 'day')
     }
     this.filtersFormGroup.get(columnRef).setValue(dateRange);
   }

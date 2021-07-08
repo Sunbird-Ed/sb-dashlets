@@ -1,11 +1,10 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../../services/index';
 import { BaseChartDirective, ThemeService } from 'ng2-charts';
-import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types/index';
+import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
-import { DEFAULT_CONFIG, DASHLET_CONSTANTS } from '../../tokens/index';
+import { DEFAULT_CONFIG, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 
 /**
@@ -35,7 +34,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
 
-  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this._defaultConfig = defaultConfig;
   }
@@ -123,7 +122,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   }
 
   reset(): void {
-    // throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
   }
 
   destroy(): void {

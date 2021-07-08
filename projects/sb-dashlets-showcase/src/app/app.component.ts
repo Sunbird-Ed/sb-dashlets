@@ -16,15 +16,7 @@ export class AppComponent implements AfterViewInit {
     labelExpr: 'District',
     datasets: [
       { dataExpr: 'Total Plays', label: 'Total Plays' }
-    ],
-    options: {
-      title: {
-        text: `Device Metrics`,
-        display: true,
-        fontSize: 20
-      }
-    },
-    legend: false
+    ]
   };
 
   config2 = {
@@ -43,16 +35,16 @@ export class AppComponent implements AfterViewInit {
     }
   };
 
-  data = {
+  data2 = {
     values: data
   };
 
-  // data: IData = {
-  //   location: {
-  //     url: 'http://127.0.0.1:8080/data.json',
-  //     method: 'GET'
-  //   }
-  // }
+  data = {
+    location: {
+      url: '/assets/data.json',
+      method: 'GET'
+    }
+  }
 
   dtOptions = {
     data: data,
@@ -158,13 +150,59 @@ export class AppComponent implements AfterViewInit {
     ]
   }
 
+  mapData = {
+    filters: [
+      {
+        "reference": "District",
+        "controlType": "multi-select",
+        "displayName": "Select District",
+        "placeholder": "Select District Name",
+        "label": "District",
+        "searchable": true
+      }
+    ],
+    "state": "Uttar Pradesh",
+    "folder": "assets",
+    "metrics": [
+      "Total Plays",
+      "Old Devices"
+    ],
+    "districts": [
+      "Lucknow",
+      "Allahabad",
+      "Aligarh",
+      "Azamgarh",
+      "Jaunpur",
+      "Bijnor",
+      "Kanpur Nagar",
+      "Ghaziabad",
+      "Ghazipur",
+      "Lakhimpur",
+      "Agra",
+      "Farrukhabad",
+      "Bulandshehr",
+      "Mathura",
+      "Varanasi",
+      "Ballia",
+      "Fatehpur",
+      "Unnao",
+      "Gautam Buddh Nagar",
+      "Ambedkar Nagar",
+      "Saharanpur",
+      "Bareilly"
+    ],
+    "labelExpr": "District",
+    "controlTitle": "Tamil Nadu Weekly Usage",
+    "omitMetrics": ["st_code", "code"]
+  }
+
   constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
     this.renderer.listen('document', 'click', (event) => {
-    if (event.target.hasAttribute("data")) {
+      if (event.target.hasAttribute("data")) {
         // do something with the data
-    }
-});
+      }
+    });
   }
 }

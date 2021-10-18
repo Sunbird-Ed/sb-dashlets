@@ -29,6 +29,7 @@ export class DtTableComponent extends BaseComponent {
   public _defaultConfig: object;
   public inputParameters = {};
   public exportOptions = ['csv'];
+  @ViewChild('filterDom', { static: false }) filter: any;
 
   @ViewChild(DataTableDirective) set dataTableElement(element: ElementRef | null) {
     if (!element) return;
@@ -227,6 +228,11 @@ export class DtTableComponent extends BaseComponent {
         this.exportAsCsv(data && data.toArray(), options);
         break;
       }
+    }
+  }
+  public resetFilters(){
+    if(this.filter){
+      this.filter.reset();
     }
   }
 }

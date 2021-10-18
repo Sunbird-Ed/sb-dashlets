@@ -87,4 +87,7 @@ export class DashletComponent implements OnInit {
   public filter(filteredData) {
     this.instance.update({ data: filteredData });
   }
+  public reset(){
+    this.instance.reset();
+  }
 }

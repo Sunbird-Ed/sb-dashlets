@@ -14,7 +14,7 @@
 
 <ng-template #defaultFilterTemplate let-context>
   <sb-dashlets-filters [data]="context?.data" [config]="context?.config?.filters"
-    (filteredData)="update({data: $event})">
+    (filteredData)="update({data: $event})" #filterDom>
   </sb-dashlets-filters>
 </ng-template>
 

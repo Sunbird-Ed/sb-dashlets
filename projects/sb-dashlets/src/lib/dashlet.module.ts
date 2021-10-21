@@ -12,6 +12,8 @@ import { DATA_SERVICE } from './tokens/index'
 import { IDashletsConfig } from './types/index';
 import { DataService } from './services/index';
 
+
+
 @NgModule({
   declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent, MapComponent],
   imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule,
@@ -26,7 +28,7 @@ export class DashletModule {
     return {
       ngModule: DashletModule,
       providers: [
-        { provide: DATA_SERVICE, useClass: (config && config.dataService) || DataService }
+        { provide: DATA_SERVICE, useClass: DataService }
       ]
     }
   }

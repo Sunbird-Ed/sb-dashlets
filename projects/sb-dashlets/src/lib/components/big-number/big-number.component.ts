@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject,ViewChild} from '@angular/core';
 import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
@@ -28,6 +28,8 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   public exportOptions = ['csv'];
 
   private _bigNumberClosure: any;
+
+  @ViewChild('filterDom', { static: false }) filter: any;
 
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -123,4 +125,11 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
     this.exportAsCsv();
   }
+
+  public resetFilters(){
+    if(this.filter){
+      this.filter.reset();
+    }
+  }
+  
 }

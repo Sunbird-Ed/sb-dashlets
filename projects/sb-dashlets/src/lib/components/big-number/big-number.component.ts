@@ -29,8 +29,6 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
   private _bigNumberClosure: any;
 
-  @ViewChild('filterDom', { static: false }) filter: any;
-
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG_TOKEN) defaultConfig: IBigNumberConfig, private cdr: ChangeDetectorRef, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this._defaultConfig = defaultConfig;
@@ -75,7 +73,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   }
 
   reset(): void {
-    throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
+    this.eventsSubject.next();
   }
 
   destroy(): void {
@@ -124,12 +122,6 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
     }
 
     this.exportAsCsv();
-  }
-
-  public resetFilters(){
-    if(this.filter){
-      this.filter.reset();
-    }
   }
   
 }

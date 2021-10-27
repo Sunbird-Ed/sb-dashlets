@@ -1,6 +1,6 @@
 <ng-template #defaultFilterTemplate let-context>
   <sb-dashlets-filters [data]="context?.data" [config]="context?.config?.filters"
-    (filteredData)="update({data: $event})" #filterDom>
+    (filteredData)="update({data: $event})" [resetFilters]="eventsSubject.asObservable()">
   </sb-dashlets-filters>
 </ng-template>
 

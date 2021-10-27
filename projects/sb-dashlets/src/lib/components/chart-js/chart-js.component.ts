@@ -33,7 +33,6 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public inputParameters: Partial<IChartOptions> = {};
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
-  @ViewChild('filterDom', { static: false }) filter: any;
   
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -119,11 +118,11 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
 
   private setChartData(config: Partial<IChartOptions> = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions,reset:true };
   }
 
   reset(): void {
-    throw new Error('Method not implemented.');
+    this.eventsSubject.next();
   }
 
   destroy(): void {
@@ -225,12 +224,6 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
         this.exportAsImage(format);
         break;
       }
-    }
-  }
-
-  public resetFilters(){
-    if(this.filter){
-      this.filter.reset();
     }
   }
 

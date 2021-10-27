@@ -1,5 +1,5 @@
 import { EventEmitter, Inject, TemplateRef } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of,Subject } from 'rxjs';
 import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent, IDataService } from '../../types/index';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
@@ -19,6 +19,8 @@ export abstract class BaseComponent implements Partial<IBase> {
 
   state = new EventEmitter<ReportState>();
   events = new EventEmitter<CustomEvent>();
+  eventsSubject: Subject<void> = new Subject<void>();
+
   x
   abstract inputParameters;
   abstract reportType: IReportType;
@@ -95,4 +97,6 @@ export abstract class BaseComponent implements Partial<IBase> {
       return pick({ ...defaultValue, ...row }, columnsToPick);
     });
   }
+
+
 }

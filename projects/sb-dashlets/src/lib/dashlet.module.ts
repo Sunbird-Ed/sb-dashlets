@@ -28,7 +28,7 @@ export class DashletModule {
     return {
       ngModule: DashletModule,
       providers: [
-        { provide: DATA_SERVICE, useClass: DataService }
+        { provide: DATA_SERVICE, useClass: (config && config.dataService) || DataService  }
       ]
     }
   }

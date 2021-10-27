@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject,ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject} from '@angular/core';
 import { IReportType, InputParams, IBigNumberConfig, IBigNumber, ChartType, UpdateInputParams, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { DEFAULT_CONFIG as DEFAULT_CONFIG_TOKEN, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';

@@ -30,7 +30,6 @@ export class DtTableComponent extends BaseComponent {
   public _defaultConfig: object;
   public inputParameters = {};
   public exportOptions = ['csv'];
-  @ViewChild('filterDom', { static: false }) filter: any;
 
   @ViewChild(DataTableDirective) set dataTableElement(element: ElementRef | null) {
     if (!element) return;

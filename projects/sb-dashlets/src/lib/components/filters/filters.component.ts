@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DEFAULT_CONFIG } from '../../tokens/index';
 import * as _ from 'lodash-es'
 import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, startWith } from 'rxjs/operators';
-import { Subject, zip,Observable,Subscription } from 'rxjs';
+import { Subject, zip,Observable } from 'rxjs';
 import { IFilterConfig } from '../../types/index'
 import { FILTER_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as dayjs from 'dayjs'
@@ -52,7 +52,6 @@ export class FiltersComponent implements OnInit, OnDestroy {
   @Input() config: IFilterConfig[] = [];
   @Input() data;
   @Output() filteredData = new EventEmitter();
-  private eventsSubscription: Subscription;
   @Input() resetFilters: Observable<void>;
 
   private _data;

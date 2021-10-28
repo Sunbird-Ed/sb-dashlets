@@ -23,7 +23,7 @@ export class DashletComponent implements OnInit {
   @Input() data: object;
 
   @Output() events = new EventEmitter();
-
+  
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
 
@@ -83,8 +83,11 @@ export class DashletComponent implements OnInit {
   private _eventsHandler(event: CustomEvent) {
     this.events.emit(event);
   }
-
+  
   public filter(filteredData) {
     this.instance.update({ data: filteredData });
+  }
+  public reset(){
+    this.instance.reset();
   }
 }

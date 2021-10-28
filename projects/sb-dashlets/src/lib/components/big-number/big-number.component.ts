@@ -73,7 +73,7 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
   }
 
   reset(): void {
-    throw new Error(this.CONSTANTS.METHOD_NOT_IMPLEMENTED);
+    this.eventsSubject.next();
   }
 
   destroy(): void {
@@ -123,4 +123,5 @@ export class BigNumberComponent extends BaseComponent implements IBigNumber {
 
     this.exportAsCsv();
   }
+  
 }

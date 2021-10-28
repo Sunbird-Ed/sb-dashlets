@@ -24,6 +24,7 @@ export class DtTableComponent extends BaseComponent {
 
   private _dtClosure: any;
 
+    
   public reportType: IReportType = IReportType.TABLE;
   public config: object;
   public _defaultConfig: object;
@@ -83,7 +84,7 @@ export class DtTableComponent extends BaseComponent {
       ...this.inputParameters,
       ...config
     }
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions,reset:false };
   }
 
   getRowsCount(): Promise<number> {
@@ -92,7 +93,8 @@ export class DtTableComponent extends BaseComponent {
 
   // resets to the original state.
   reset(): void {
-    this._dtClosure.updateData(this.data);
+      this.eventsSubject.next();
+      this._dtClosure.updateData(this.data);
   }
 
   destroy(): void {

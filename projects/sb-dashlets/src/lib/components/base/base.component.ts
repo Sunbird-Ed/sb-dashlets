@@ -21,7 +21,6 @@ export abstract class BaseComponent implements Partial<IBase> {
   events = new EventEmitter<CustomEvent>();
   eventsSubject: Subject<void> = new Subject<void>();
 
-  x
   abstract inputParameters;
   abstract reportType: IReportType;
   abstract config: object;

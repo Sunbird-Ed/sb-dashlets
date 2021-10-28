@@ -23,8 +23,7 @@ export class DashletComponent implements OnInit {
   @Input() data: object;
 
   @Output() events = new EventEmitter();
-  @Output() filterEvents = new EventEmitter();
-
+  
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
 

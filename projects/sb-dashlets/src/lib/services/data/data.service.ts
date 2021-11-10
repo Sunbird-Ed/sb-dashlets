@@ -9,7 +9,9 @@ type apiConfig = {
   url: string;
   options: Partial<IApiConfig>
 }
-
+@Injectable({
+  providedIn: 'root'
+})
 export class DataService implements IDataService {
 
   constructor(private httpClient: HttpClient) { }

@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sb-dashlet-v9",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Ravinder Kumar",
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",
@@ -19,7 +19,7 @@
     "jquery": "3.4.1",
     "@types/datatables.net": "1.10.19",
     "ng-multiselect-dropdown": "0.3.4",
-    "ngx-daterangepicker-material": "5.0.0",
+    "ngx-daterangepicker-material": "^4.0.1",
     "jsonexport": "3.2.0",
     "joi": "17.4.0"
   },

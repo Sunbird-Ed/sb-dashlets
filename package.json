@@ -27,6 +27,7 @@
     "datatables.net-buttons": "^1.7.0",
     "datatables.net-buttons-dt": "^1.7.0",
     "datatables.net-dt": "^1.10.20",
+    "dayjs": "^1.8.26",
     "joi": "^17.4.0",
     "jquery": "^3.4.1",
     "jsonexport": "^3.2.0",
@@ -35,7 +36,7 @@
     "lodash-es": "^4.17.21",
     "ng-multiselect-dropdown": "0.3.4",
     "ng2-charts": "^2.4.2",
-    "ngx-daterangepicker-material": "5.0.0",
+    "ngx-daterangepicker-material": "^4.0.1",
     "rxjs": "~6.6.7",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

@@ -6,7 +6,7 @@ import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, star
 import { Subject, zip,Observable } from 'rxjs';
 import { IFilterConfig } from '../../types/index'
 import { FILTER_DEFAULT_CONFIG } from './defaultConfiguration';
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 dayjs.extend(customParseFormat)
 

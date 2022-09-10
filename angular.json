@@ -58,7 +58,6 @@
             "main": "projects/sb-dashlets-showcase/src/main.ts",
             "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
             "tsConfig": "projects/sb-dashlets-showcase/tsconfig.app.json",
-            "aot": true,
             "allowedCommonJsDependencies": [
               "chart.js",
               "jsonexport/dist"
@@ -76,7 +75,13 @@
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/leaflet/dist/leaflet.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -106,7 +111,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

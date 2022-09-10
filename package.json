@@ -26,7 +26,7 @@
     "@project-sunbird/sb-styles": "0.0.7",
     "@schematics/angular": "^12.2.18",
     "@schematics/update": "^0.1102.18",
-    "angular-datatables": "^12.0.2",
+    "angular-datatables": "^13.1.0",
     "chart.js": "^2.9.4",
     "datatables.net": "^1.10.20",
     "datatables.net-buttons": "^1.7.0",

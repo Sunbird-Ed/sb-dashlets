@@ -13,11 +13,7 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/sb-dashlets/tsconfig.lib.json",
-            "project": "projects/sb-dashlets/ng-package.json",
-            "allowedCommonJsDependencies": [
-              "chart.js",
-              "jsonexport/dist"
-            ]
+            "project": "projects/sb-dashlets/ng-package.json"
           },
           "configurations": {
             "production": {
@@ -63,6 +59,10 @@
             "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
             "tsConfig": "projects/sb-dashlets-showcase/tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "jsonexport/dist"
+            ],
             "assets": [
               "projects/sb-dashlets-showcase/src/favicon.ico",
               "projects/sb-dashlets-showcase/src/assets"

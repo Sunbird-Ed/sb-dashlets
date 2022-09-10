@@ -12,6 +12,9 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/architect": "^0.1002.4",
+    "@angular-devkit/core": "^10.2.4",
+    "@angular-devkit/schematics": "^10.2.4",
     "@angular/animations": "~10.2.5",
     "@angular/common": "~10.2.5",
     "@angular/compiler": "~10.2.5",
@@ -21,6 +24,8 @@
     "@angular/platform-browser-dynamic": "~10.2.5",
     "@angular/router": "~10.2.5",
     "@project-sunbird/sb-styles": "0.0.7",
+    "@schematics/angular": "^10.2.4",
+    "@schematics/update": "^0.1002.4",
     "angular-datatables": "9.1.0-rc1",
     "chart.js": "^2.9.4",
     "datatables.net": "^1.10.20",

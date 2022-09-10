@@ -13,7 +13,11 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/sb-dashlets/tsconfig.lib.json",
-            "project": "projects/sb-dashlets/ng-package.json"
+            "project": "projects/sb-dashlets/ng-package.json",
+            "allowedCommonJsDependencies": [
+              "chart.js",
+              "jsonexport/dist"
+            ]
           },
           "configurations": {
             "production": {

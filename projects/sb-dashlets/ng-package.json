@@ -4,7 +4,7 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "ng2-semantic-ui",
     "chart.js",
     "ng2-charts",

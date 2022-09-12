@@ -25,7 +25,7 @@ export abstract class BaseComponent implements Partial<IBase> {
   abstract reportType: IReportType;
   abstract config: object;
   abstract _defaultConfig: object;
-  abstract exportOptions: string[] = [];
+  abstract exportOptions: string[];
   abstract initialize(config: InputParams): Promise<any>
   abstract builder(config, data): void;
   abstract reset(): void;

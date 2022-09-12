@@ -15,16 +15,15 @@ import { DataService } from './services/index';
 
 
 @NgModule({
-  declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent, MapComponent],
-  imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule,
-    NgxDaterangepickerMd.forRoot(),
-  ],
-  exports: [DashletComponent, TemplateRefsDirective],
-  entryComponents: [ChartJsComponent, BigNumberComponent, DtTableComponent, MapComponent]
+    declarations: [ChartJsComponent, DashletComponent, ReportWrapperDirective, BigNumberComponent, DtTableComponent, TemplateRefsDirective, FiltersComponent, MapComponent],
+    imports: [HttpClientModule, ChartsModule, CommonModule, DataTablesModule, ReactiveFormsModule, NgMultiSelectDropDownModule,
+        NgxDaterangepickerMd.forRoot(),
+    ],
+    exports: [DashletComponent, TemplateRefsDirective]
 })
 export class DashletModule {
 
-  static forRoot(config?: IDashletsConfig): ModuleWithProviders {
+  static forRoot(config?: IDashletsConfig): ModuleWithProviders<DashletModule> {
     return {
       ngModule: DashletModule,
       providers: [

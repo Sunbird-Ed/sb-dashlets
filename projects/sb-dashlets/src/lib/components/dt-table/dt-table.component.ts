@@ -7,8 +7,8 @@ import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
 import { sortBy, map, get, omitBy } from 'lodash-es';
 
-
 declare var $;
+
 @Component({
   selector: 'sb-dt-table',
   templateUrl: './dt-table.component.html',
@@ -52,8 +52,8 @@ export class DtTableComponent extends BaseComponent {
 
   private rowClickHandler = (row: Node, data: any[] | Object, index: number) => {
     const self = this;
-    $('td', row).off('click');
-    $('td', row).on('click', () => {
+    $.default('td', row).off('click');
+    $.default('td', row).on('click', () => {
       this.events.emit({
         type: 'CLICK',
         event: data

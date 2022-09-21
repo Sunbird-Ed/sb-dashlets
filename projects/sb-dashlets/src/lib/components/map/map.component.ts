@@ -7,8 +7,7 @@ import { cloneDeep, toLower, find, groupBy, reduce, omit } from 'lodash-es';
 import * as geoJSONMapping from './geoJSONDataMapping.json'
 import { catchError, skipWhile, tap, map, switchMap } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-
-declare var L;
+import * as L from "leaflet";
 
 /**
  * @dynamic

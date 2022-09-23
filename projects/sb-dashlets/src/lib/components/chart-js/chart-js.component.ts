@@ -112,13 +112,22 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       this._labelsAndDatasetsClosure = this.getLabelsAndDatasetsClosure(labelExpr, datasets)(data);
       const { getData } = this._labelsAndDatasetsClosure;
       ({ labels, datasets } = getData());
+    } else {
+      datasets = datasets.map(dataset => {
+        dataset.data = data.map(rec => rec[dataset.dataExpr]);
+        return dataset;
+      });
     }
+    
     this.setChartData({ labels, datasets, options, type, legend, colors });
   }
 
   private setChartData(config: Partial<IChartOptions> = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
     this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
+
+    console.log(this.$context);
+    
   }
 
   reset(): void {

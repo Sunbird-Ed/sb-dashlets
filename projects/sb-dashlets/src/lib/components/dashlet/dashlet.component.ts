@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ContentChildren, EventEmitter, Input, OnInit, Output, QueryList, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, ContentChildren, EventEmitter, Input, OnChanges, OnInit, Output, QueryList, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives/index';
 import { CustomEvent, IBase, ReportState } from '../../types/index';
 import { TYPE_TO_COMPONENT_MAPPING } from './type_to_component_mapping';
@@ -16,7 +16,7 @@ const transformTemplates = (result: object, current: { slot: string, templateRef
   templateUrl: './dashlet.component.html',
   styleUrls: ['./dashlet.component.css']
 })
-export class DashletComponent implements OnInit {
+export class DashletComponent implements OnInit, OnChanges {
 
   @Input() type: string;
   @Input() config: object;
@@ -43,13 +43,17 @@ export class DashletComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = uuidv4();
-    if (!this.type && !this.config && !this.data) {
-      throw new SyntaxError('Syntax Error. Please check configuration');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.type && this.config && this.data) {
+      this.loadComponent(this.type).catch(err => {
+        console.error(err);
+        throw err;
+      });
     }
-    this.loadComponent(this.type).catch(err => {
-      console.error(err);
-      throw err;
-    });
+
+    console.error('Syntax Error. Please check configuration');
   }
 
   async loadComponent(type: string) {

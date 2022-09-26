@@ -202,7 +202,6 @@ export class MapComponent extends BaseComponent {
    * @memberof Map2Component
    */
   private clickHandler({ properties = {}, metaData = {} }: { properties: Properties; metaData: Partial<ICustomMapObj> }, event) {
-    console.log({ ...properties, ...metaData });
     this.events.emit({
       type: 'CLICK',
       event: {

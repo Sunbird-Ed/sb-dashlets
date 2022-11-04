@@ -66,7 +66,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     return (data: object[]) => {
       const getDataGroupedByLabelExpr = data => groupBy(data, val => {
         const value = get(val, labelExpr);
-        return value && typeof value === 'string' ? value.toLowerCase().trim() : '';
+        return value && typeof value === 'string' ? value.trim() : '';
       });
       const getLabels = (data: object) => Object.keys(data);
       const getDatasets = (data: object) => datasets.map(dataset => {

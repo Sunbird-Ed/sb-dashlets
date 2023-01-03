@@ -24,7 +24,7 @@ import { DataService } from './services/index';
 })
 export class DashletModule {
 
-  static forRoot(config?: IDashletsConfig): ModuleWithProviders {
+  static forRoot(config?: IDashletsConfig): ModuleWithProviders<DashletModule> {
     return {
       ngModule: DashletModule,
       providers: [

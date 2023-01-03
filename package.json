@@ -36,7 +36,7 @@
     "lodash-es": "^4.17.21",
     "ng-multiselect-dropdown": "0.3.4",
     "ng2-charts": "^2.4.2",
-    "ngx-daterangepicker-material": "^4.0.1",
+    "ngx-daterangepicker-material": "5.0.2",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

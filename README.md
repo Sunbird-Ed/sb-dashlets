@@ -1,6 +1,6 @@
 # sb-dashlets
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
 
 ## Development server
 
@@ -31,5 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 | release branch    | npm package version | Angular Version |
 |-------------------|---------------------|-----------------|
 | V10_Migration     |      5.1.0          |     Ng V10      |
+| V11_Migration     |      5.1.1          |     Ng V11      |
+
 
 

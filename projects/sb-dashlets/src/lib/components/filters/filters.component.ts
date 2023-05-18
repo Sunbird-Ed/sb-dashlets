@@ -13,8 +13,8 @@ dayjs.extend(customParseFormat)
 const ranges: any = {
   'Today': [dayjs(), dayjs()],
   'Yesterday': [dayjs().subtract(1, 'day'), dayjs().subtract(1, 'day')],
-  'Last 7 Days': [dayjs().subtract(6, 'days'), dayjs()],
-  'Last 30 Days': [dayjs().subtract(29, 'days'), dayjs()],
+  'Last 7 Days': [dayjs().subtract(6, 'day'), dayjs()],
+  'Last 30 Days': [dayjs().subtract(29, 'day'), dayjs()],
   'This Month': [dayjs().startOf('month'), dayjs().endOf('month')],
   'Last Month': [dayjs().subtract(1, 'month').startOf('month'), dayjs().subtract(1, 'month').endOf('month')]
 };

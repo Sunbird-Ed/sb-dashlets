@@ -1,6 +1,6 @@
 # sb-dashlets
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.17.
 
 ## Development server
 
@@ -32,6 +32,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 |-------------------|---------------------|-----------------|
 | V10_Migration     |      5.1.0          |     Ng V10      |
 | V11_Migration     |      5.1.1          |     Ng V11      |
+| V12_Migration     |      5.1.2          |     Ng V12      |
 
 
+## Note 
+While running command -> ng build sb-dashlates if you are facing below Error
 
+✖ Bundling to FESM2015
+ERROR: Invalid value for option "output.file" - when building multiple chunks, the "output.dir" option must be used, not "output.file". To inline dynamic imports, set the "inlineDynamicImports" option.
+
+FIX: Use this path ->  node_modules/ng-packagr/lib/flatten/rollup.js change the  inlineDynamicImports: false ->   inlineDynamicImports: true,

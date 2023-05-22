@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnDestroy, Inject, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { DEFAULT_CONFIG } from '../../tokens/index';
 import * as _ from 'lodash-es'
 import { debounceTime, distinctUntilChanged, takeUntil, map, tap, pairwise, startWith } from 'rxjs/operators';
@@ -56,7 +56,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
   private _data;
 
-  public filtersFormGroup: FormGroup;
+  public filtersFormGroup: UntypedFormGroup;
   public filters: IFilterConfiguration[];
   public unsubscribe$ = new Subject<void>();
   public ranges = ranges;
@@ -65,7 +65,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
 
   @ViewChild('datePickerForFilters') datepicker: ElementRef;
 
-  constructor(private fb: FormBuilder, @Inject(DEFAULT_CONFIG) private defaultConfig) { }
+  constructor(private fb: UntypedFormBuilder, @Inject(DEFAULT_CONFIG) private defaultConfig) { }
 
   ngOnInit() {
     this._data = this.data;

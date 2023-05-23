@@ -1,6 +1,6 @@
 # sb-dashlets
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.4.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.3.0.
 
 ## Development server
 
@@ -34,6 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 | V11_Migration     |      5.1.1          |     Ng V11      |
 | V12_Migration     |      5.1.2          |     Ng V12      |
 | V13_Migration     |      5.1.3          |     Ng V13      |
+| V14_Migration     |      5.1.4          |     Ng V14      |
 
 ## Note 
 While running command -> ng build sb-dashlates if you are facing below Error

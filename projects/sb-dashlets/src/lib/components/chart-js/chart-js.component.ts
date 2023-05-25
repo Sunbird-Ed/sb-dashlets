@@ -6,7 +6,6 @@ import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
 import { DEFAULT_CONFIG, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
-import * as pluginAnnotation from 'chartjs-plugin-annotation';
 
 /**
  * @dynamic
@@ -34,7 +33,6 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public inputParameters: Partial<IChartOptions> = {};
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
-  public barChartPlugins = [pluginAnnotation];
   
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);

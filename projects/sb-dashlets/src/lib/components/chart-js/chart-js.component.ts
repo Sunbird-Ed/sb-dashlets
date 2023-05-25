@@ -6,6 +6,7 @@ import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
 import { DEFAULT_CONFIG, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
+import * as pluginAnnotation from 'chartjs-plugin-annotation';
 
 /**
  * @dynamic
@@ -33,6 +34,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public inputParameters: Partial<IChartOptions> = {};
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
+  public barChartPlugins = [pluginAnnotation];
   
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -66,7 +68,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
     return (data: object[]) => {
       const getDataGroupedByLabelExpr = data => groupBy(data, val => {
         const value = get(val, labelExpr);
-        return value && typeof value === 'string' ? value.toLowerCase().trim() : '';
+        return value && typeof value === 'string' ? value.trim() : '';
       });
       const getLabels = (data: object) => Object.keys(data);
       const getDatasets = (data: object) => datasets.map(dataset => {
@@ -112,7 +114,13 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       this._labelsAndDatasetsClosure = this.getLabelsAndDatasetsClosure(labelExpr, datasets)(data);
       const { getData } = this._labelsAndDatasetsClosure;
       ({ labels, datasets } = getData());
+    } else {
+      datasets = datasets.map(dataset => {
+        dataset.data = data.map(rec => rec[dataset.dataExpr]);
+        return dataset;
+      });
     }
+    
     this.setChartData({ labels, datasets, options, type, legend, colors });
   }
 

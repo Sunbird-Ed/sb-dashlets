@@ -17,7 +17,6 @@
     "@types/datatables.net",
     "ng-multiselect-dropdown",
     "ngx-daterangepicker-material",
-    "jsonexport",
     "joi"
   ]
 }

@@ -4,7 +4,6 @@ import { DASHLET_CONSTANTS, DATA_SERVICE, DEFAULT_CONFIG } from '../../tokens/in
 import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
-import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
 import { sortBy, map, get, omitBy } from 'lodash-es';
 
 

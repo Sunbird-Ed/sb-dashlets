@@ -3,7 +3,6 @@ import { Observable, of,Subject } from 'rxjs';
 import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent, IDataService } from '../../types/index';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
-import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
 import { pick } from 'lodash-es';
 import { DATA_SERVICE } from '../../tokens/index';
 
@@ -63,14 +62,25 @@ export abstract class BaseComponent implements Partial<IBase> {
 
   getCsv(data, options) {
     return new Promise((resolve, reject) => {
-      jsonExport(data, options, (error, csv) => {
-        if (!error && csv) {
-          resolve(csv);
-        } else {
-          reject(error);
-        }
-      })
-    })
+      try {
+        const csv = this.convertJsonToCsv(data,options);
+        resolve(csv);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+  /**
+ * @description  this method is used to convert json to csv 
+ * @param {data} any[] json data to be converted into csv
+ * @param {oftions} object rename object to change the column label of the csv file
+ * 
+ */
+  convertJsonToCsv(data: any[], oftions: any): string {
+    let oftionData = oftions?.rename;
+    const header = oftionData ? (oftionData).join(",") : Object.keys(data[0]).join(",");
+    const rows = data.map((item) => Object.values(item).join(","));
+    return [header, ...rows].join("\n");
   }
 
   async exportAsCsv(data?: object[], options?: Record<string, any>) {

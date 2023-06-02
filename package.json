@@ -10,7 +10,6 @@
     "e2e": "ng e2e",
     "build-lib": "ng build sb-dashlets"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "14.3.0",
     "@angular/common": "14.3.0",
@@ -31,7 +30,6 @@
     "dayjs": "1.8.26",
     "joi": "17.4.0",
     "jquery": "3.4.1",
-    "jsonexport": "3.2.0",
     "jszip": "3.6.0",
     "leaflet": "1.7.1",
     "lodash-es": "4.17.21",

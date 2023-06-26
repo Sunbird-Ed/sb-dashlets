@@ -1,5 +1,5 @@
 import { EventEmitter, Inject, TemplateRef } from '@angular/core';
-import { Observable, of,Subject } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { InputParams, IBase, IData, ReportState, IReportType, UpdateInputParams, CustomEvent, IDataService } from '../../types/index';
 import { tap } from 'rxjs/operators';
 import { constants } from '../../tokens/constants';
@@ -63,7 +63,7 @@ export abstract class BaseComponent implements Partial<IBase> {
   getCsv(data, options) {
     return new Promise((resolve, reject) => {
       try {
-        const csv = this.convertJsonToCsv(data,options);
+        const csv = this.convertJsonToCsv(data, options);
         resolve(csv);
       } catch (error) {
         reject(error);
@@ -78,9 +78,20 @@ export abstract class BaseComponent implements Partial<IBase> {
  */
   convertJsonToCsv(data: any[], oftions: any): string {
     let oftionData = oftions?.rename;
-    const header = oftionData ? (oftionData).join(",") : Object.keys(data[0]).join(",");
-    const rows = data.map((item) => Object.values(item).join(","));
-    return [header, ...rows].join("\n");
+    const header = oftionData ? (oftionData).join(",") + "\n" : Object.keys(data[0]).join(",") + "\n"; // TO Generate the CSV header
+    let csvData = header;
+    for (const row of data) {
+      const values = Object.values(row).map((value: any) => {
+        // Check if the value contains commas
+        if (typeof value === 'string' && value.includes(',')) {
+          // Escape the value by wrapping it in double quotes and replacing any double quotes within the value
+          return `"${value.replace(/"/g, '""')}"`;
+        }
+        return value;
+      });
+      csvData += values.join(",") + "\n";
+    }
+    return csvData;
   }
 
   async exportAsCsv(data?: object[], options?: Record<string, any>) {

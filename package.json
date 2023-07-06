@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "13.4.0",
     "@angular/router": "13.4.0",
     "@project-sunbird/sb-styles": "0.0.16",
-    "angular-datatables": "^13.1.0",
+    "angular-datatables": "13.1.0",
     "chart.js": "2.9.4",
     "datatables.net": "1.10.20",
     "datatables.net-buttons": "1.7.0",
@@ -38,7 +38,7 @@
     "ng2-charts": "2.4.2",
     "ngx-daterangepicker-material": "6.0.4",
     "rxjs": "6.6.7",
-    "tslib": "^2.5.1",
+    "tslib": "2.5.1",
     "zone.js": "0.11.4"
   },
   "devDependencies": {

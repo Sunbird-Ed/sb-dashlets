@@ -11,13 +11,13 @@
   "peerDependencies": {
     "@angular/common": "13.4.0",
     "@angular/core": "13.4.0",
-    "rxjs": "~6.4.0"
+    "rxjs": "6.6.7"
   },
   "dependencies": {
     "chart.js": "2.9.4",
     "ng2-charts": "2.4.2",
     "lodash-es": "4.17.21",
-    "angular-datatables": "9.1.0-rc1",
+    "angular-datatables": "13.1.0",
     "datatables.net": "1.10.20",
     "datatables.net-dt": "1.10.20",
     "jquery": "3.4.1",
@@ -26,7 +26,7 @@
     "ngx-daterangepicker-material": "6.0.4",
     "jsonexport": "3.2.0",
     "joi": "17.4.0",
-    "tslib": "^2.0.0"
+    "tslib": "2.0.0"
   },
   "keywords": [
     "dashlets",

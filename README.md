@@ -1,30 +1,63 @@
-# sb-dashlets
+# Sunbird
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.3.0.
+## @project-sunbird/sb-dashlet
 
-## Development server
+<p>
+  <img alt="angular" src="https://img.shields.io/badge/-Angular-DD0031?style=flat-square&logo=angular&logoColor=white" height=25 />
+  <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" height=25 />
+</p>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The library contains the Reusable charts. Supported by charts has an extensible, general-purpose analytical presentation capabilities like graphs, tables, charts
 
-## Code scaffolding
+---
+## Getting started
+How to use @project-sunbird/sb-dashlet in your projects
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Using library locally
 
-## Build
+1. Build library
+```console
+npm run build-lib
+```
+## Note 
+    While running command -> ng build sb-dashlates if you are facing below Error
+    
+    ✖ Bundling to FESM2015
+    ERROR: Invalid value for option "output.file" - when building multiple chunks, the "output.dir" option must be used, not "output.file". To inline dynamic imports, set the       "inlineDynamicImports" option.
+    
+    FIX: Use this path ->  node_modules/ng-packagr/lib/flatten/rollup.js change the  inlineDynamicImports: false ->   inlineDynamicImports: true,
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. Link library to your project
+```console
+npm link @project-sunbird/sb-dashlet
+```
+---
 
-## Running unit tests
+### Step 1: Install the package
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    npm install @project-sunbird/sb-dashlet --save
 
-## Running end-to-end tests
+### Step 2: Import the modules and components
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  Import the NgModule for each component you want to use:
+    
+    import { DashletModule } from '@project-sunbird/sb-dashlet';
+       
+    @NgModule({
+        ...
+        
+        imports: [DashletModule], 
+        
+        ...
+    })
+  
+    export class TestAppModule { }
+    
+## Step 3: Include the library selector in view( Eg .HTML file)
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+**Selector**: sb-dashlet  **Exported as**: DashletModule 
+   
+     <sb-dashlet [config]='config'></sb-dashlet>
 
 ## Versions
 
@@ -36,10 +69,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 | V13_Migration     |      5.1.3          |     Ng V13      |
 | V14_Migration     |      6.0.5          |     Ng V14      |
 
-## Note 
-While running command -> ng build sb-dashlates if you are facing below Error
-
-✖ Bundling to FESM2015
-ERROR: Invalid value for option "output.file" - when building multiple chunks, the "output.dir" option must be used, not "output.file". To inline dynamic imports, set the "inlineDynamicImports" option.
-
-FIX: Use this path ->  node_modules/ng-packagr/lib/flatten/rollup.js change the  inlineDynamicImports: false ->   inlineDynamicImports: true,

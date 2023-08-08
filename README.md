@@ -1,4 +1,4 @@
-# Sunbird
+# Sunbird Dashlet
 
 ## @project-sunbird/sb-dashlet
 
@@ -12,6 +12,15 @@ The library contains the Reusable charts. Supported by charts has an extensible,
 ---
 ## Getting started
 How to use @project-sunbird/sb-dashlet in your projects
+
+## Table of Contents
+
+- [Using library locally](#using-library-locally)
+- [Step 1: Install the package](#step-1-install-the-package)
+- [Step 2: Import the modules and components](#step-2-import-the-modules-and-components)
+- [Step 3: Include the library selector in view( Eg .HTML file)](#step-3-include-the-library-selector-in-view-eg-html-file)
+- [Versions](#versions)
+---
 
 ## Using library locally
 
@@ -27,7 +36,12 @@ npm run build-lib
     
     FIX: Use this path ->  node_modules/ng-packagr/lib/flatten/rollup.js change the  inlineDynamicImports: false ->   inlineDynamicImports: true,
 
-2. Link library to your project
+2. link library
+   -> cd dist/sb-dashlet
+```console
+npm link
+```
+3. Link library to your project
 ```console
 npm link @project-sunbird/sb-dashlet
 ```
@@ -61,7 +75,7 @@ npm link @project-sunbird/sb-dashlet
 
 ## Versions
 
-| release branch    | npm package version | Angular Version |
+| Release branch    | npm package version | Angular Version |
 |-------------------|---------------------|-----------------|
 | V10_Migration     |      5.1.0          |     Ng V10      |
 | V11_Migration     |      5.1.1          |     Ng V11      |

@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "projects/sb-dashlets/tsconfig.lib.json",
             "project": "projects/sb-dashlets/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/sb-dashlets/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -53,18 +58,20 @@
             "main": "projects/sb-dashlets-showcase/src/main.ts",
             "polyfills": "projects/sb-dashlets-showcase/src/polyfills.ts",
             "tsConfig": "projects/sb-dashlets-showcase/tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "projects/sb-dashlets-showcase/src/favicon.ico",
               "projects/sb-dashlets-showcase/src/assets"
             ],
             "styles": [
               "projects/sb-dashlets-showcase/src/styles.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
-              "node_modules/datatables.net/js/jquery.dataTables.js"
+              "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/leaflet/dist/leaflet.js"
             ]
           },
           "configurations": {
@@ -80,7 +87,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -159,6 +165,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "sb-dashlets"
+    }
+  },
+  "defaultProject": "sb-dashlets",
+  "cli": {
+    "analytics": false
+  }
 }

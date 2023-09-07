@@ -3,6 +3,7 @@ import { ReportWrapperDirective, TemplateRefsDirective } from '../../directives/
 import { CustomEvent, IBase, ReportState } from '../../types/index';
 import { TYPE_TO_COMPONENT_MAPPING } from './type_to_component_mapping';
 import { v4 as uuidv4 } from 'uuid';
+import { defaultObjectSchemaAllowingAllKeys, validateInputAgainstSchema } from './schema'
 
 type componentInstanceType = Pick<IBase, "initialize" | "events" | "state" | "id">;
 
@@ -22,7 +23,7 @@ export class DashletComponent implements OnInit {
   @Input() data: object;
 
   @Output() events = new EventEmitter();
-
+  
   @ViewChild(ReportWrapperDirective, { static: true }) reportWrapper: ReportWrapperDirective;
   @ContentChildren(TemplateRefsDirective) templateRefs: QueryList<TemplateRefsDirective>;
 
@@ -52,9 +53,16 @@ export class DashletComponent implements OnInit {
   }
 
   async loadComponent(type: string) {
-    const componentResolver = this._typeToComponentMapping[type];
+    const componentResolver = this._typeToComponentMapping && this._typeToComponentMapping[type];
     if (!componentResolver) { throw new Error('Given Type not supported'); }
-    const component = await componentResolver();
+    const { componentPath, schemaPath = Promise.resolve(defaultObjectSchemaAllowingAllKeys) } = componentResolver;
+    const schema = await schemaPath;
+    const input = { data: this.data, config: this.config, type: this.type }
+    const { error } = validateInputAgainstSchema(schema)(input)
+    if (error) {
+      throw new SyntaxError(error.message)
+    }
+    const component = await componentPath;
     this.reportWrapper.viewContainerRef.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory<componentInstanceType>(component);
     const componentRef = this.reportWrapper.viewContainerRef.createComponent(componentFactory);
@@ -75,8 +83,11 @@ export class DashletComponent implements OnInit {
   private _eventsHandler(event: CustomEvent) {
     this.events.emit(event);
   }
-
+  
   public filter(filteredData) {
     this.instance.update({ data: filteredData });
+  }
+  public reset(){
+    this.instance.reset();
   }
 }

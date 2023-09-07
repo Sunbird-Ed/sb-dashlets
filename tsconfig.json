@@ -32,11 +32,18 @@
       ],
       "@project-sunbird/sb-dashlet/*": [
         "dist/sb-dashlets"
+      ],
+      "@project-sunbird/sb-dashlet-v9": [
+        "dist/sb-dashlets"
+      ],
+      "@project-sunbird/sb-dashlet-v9/*": [
+        "dist/sb-dashlets"
       ]
     }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "enableIvy": false  
   }
 }

@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { DataService } from '../../services/index';
-import { DASHLET_CONSTANTS, DEFAULT_CONFIG } from '../../tokens/index';
-import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState } from '../../types/index';
+import { DASHLET_CONSTANTS, DATA_SERVICE, DEFAULT_CONFIG } from '../../tokens/index';
+import { IReportType, InputParams, UpdateInputParams, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { TABLE_DEFAULT_CONFIG } from './defaultConfiguration';
 import * as jsonexport from "jsonexport/dist"; const jsonExport = jsonexport;
@@ -21,19 +20,23 @@ declare var $;
     }
   ]
 })
-export class DtTableComponent extends BaseComponent implements AfterViewInit {
+export class DtTableComponent extends BaseComponent {
 
   private _dtClosure: any;
 
+    
   public reportType: IReportType = IReportType.TABLE;
   public config: object;
   public _defaultConfig: object;
   public inputParameters = {};
   public exportOptions = ['csv'];
 
-  @ViewChild(DataTableDirective, { static: false }) dataTableElement: DataTableDirective;
+  @ViewChild(DataTableDirective) set dataTableElement(element: ElementRef | null) {
+    if (!element) return;
+    this._dtClosure = this._tableOpsClosure(element && element['dtInstance']);
+  }
 
-  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this._defaultConfig = defaultConfig;
   }
@@ -45,10 +48,6 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
     this.builder(config, fetchedJSON);
     this._isInitialized = true;
     this.state.emit(ReportState.DONE);
-  }
-
-  ngAfterViewInit() {
-    this._dtClosure = this._tableOpsClosure(this.dataTableElement && this.dataTableElement.dtInstance);
   }
 
   private rowClickHandler = (row: Node, data: any[] | Object, index: number) => {
@@ -85,7 +84,7 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
       ...this.inputParameters,
       ...config
     }
-    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
+    this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions,reset:false };
   }
 
   getRowsCount(): Promise<number> {
@@ -94,7 +93,8 @@ export class DtTableComponent extends BaseComponent implements AfterViewInit {
 
   // resets to the original state.
   reset(): void {
-    this._dtClosure.updateData(this.data);
+      this.eventsSubject.next();
+      this._dtClosure.updateData(this.data);
   }
 
   destroy(): void {

@@ -3,3 +3,4 @@ export * from './IBase';
 export * from './Chart/bigNumber';
 export * from './Table';
 export * from './filter';
+export * from './dataService';

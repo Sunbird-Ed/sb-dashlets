@@ -1,11 +1,10 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { DataService } from '../../services/index';
 import { BaseChartDirective, ThemeService } from 'ng2-charts';
-import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState } from '../../types/index';
+import { InputParams, IReportType, IDataset, IChart, StringObject, ReportState, IDataService } from '../../types/index';
 import { BaseComponent } from '../base/base.component';
 import { IChartOptions, ChartType, UpdateInputParams } from '../../types/index';
 import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
-import { DEFAULT_CONFIG, DASHLET_CONSTANTS } from '../../tokens/index';
+import { DEFAULT_CONFIG, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 
 /**
@@ -25,7 +24,7 @@ import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 })
 export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy {
 
-  @ViewChild(BaseChartDirective, { static: false }) baseChartDirective: BaseChartDirective;
+  @ViewChild(BaseChartDirective) baseChartDirective: BaseChartDirective;
   readonly reportType: IReportType = IReportType.CHART;
 
   public _defaultConfig: Partial<IChartOptions>;
@@ -34,8 +33,8 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public inputParameters: Partial<IChartOptions> = {};
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
-
-  constructor(protected dataService: DataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
+  
+  constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
     this._defaultConfig = defaultConfig;
   }
@@ -123,11 +122,11 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   }
 
   reset(): void {
-    // throw new Error('Method not implemented.');
+    this.eventsSubject.next();
   }
 
   destroy(): void {
-    this.baseChartDirective.chart.destroy();
+    get(this.baseChartDirective, 'chart.destroy') && this.baseChartDirective.chart.destroy();
   }
 
   ngOnDestroy() {
@@ -152,7 +151,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       ({ labels, datasets } = this._labelsAndDatasetsClosure.getData(data));
     }
     this.setChartData({ ...config, ...(type && { type }), ...(labels && datasets && { labels, datasets }) });
-    this.baseChartDirective.update();
+    get(this.baseChartDirective, 'update') && this.baseChartDirective.update();
   }
 
   addData(data: object[] | object) {
@@ -227,4 +226,5 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
       }
     }
   }
+
 }

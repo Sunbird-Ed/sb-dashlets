@@ -1,12 +1,12 @@
 {
-  "name": "@project-sunbird/sb-dashlet-v15",
-  "version": "1.0.6",
+  "name": "@project-sunbird/sb-dashlet",
+  "version": "8.0.0",
   "author": "Ravinder Kumar",
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",
   "dependencies": {
-    "@angular/common": "^15.2.10",
-    "@angular/core": "^15.2.10",
+    "@angular/common": "15.2.10",
+    "@angular/core": "15.2.10",
     "rxjs": "^6.5.3 || ^7.4.0",
     "chart.js": "^2.9.4",
     "angular-datatables": "15.0.1",

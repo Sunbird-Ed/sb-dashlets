@@ -1,6 +1,6 @@
 {
   "name": "@project-sunbird/sb-dashlet",
-  "version": "6.0.5",
+  "version": "8.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sunbird-Ed/sb-dashlets.git"
@@ -9,21 +9,21 @@
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",
   "peerDependencies": {
-    "@angular/common": "14.3.0",
-    "@angular/core": "14.3.0",
-    "rxjs": "^6.5.3 || ^7.4.0"
+    "@angular/common": "15.2.10",
+    "@angular/core": "15.2.10",
+    "rxjs": "6.6.7"
   },
   "dependencies": {
     "chart.js": "2.9.4",
     "chartjs-plugin-annotation": "^0.5.7",
     "ng2-charts": "2.4.2",
     "lodash-es": "4.17.21",
-    "angular-datatables": "14.0.2",
+    "angular-datatables": "15.0.1",
     "datatables.net": "1.10.20",
     "datatables.net-dt": "1.10.20",
-    "jquery": "3.4.1",
+    "jquery": "3.6.0",
     "@types/datatables.net": "1.10.19",
-    "ng-multiselect-dropdown": "0.3.4",
+    "ng-multiselect-dropdown": "0.3.9",
     "ngx-daterangepicker-material": "6.0.4",
     "joi": "17.4.0",
     "tslib": "^2.0.0"

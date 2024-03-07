@@ -9,9 +9,9 @@
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",
   "peerDependencies": {
-    "@angular/common": "14.3.0",
-    "@angular/core": "14.3.0",
-    "rxjs": "^6.5.3 || ^7.4.0"
+    "@angular/common": "15.2.10",
+    "@angular/core": "15.2.10",
+    "rxjs": "6.6.7"
   },
   "dependencies": {
     "chart.js": "2.9.4",

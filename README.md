@@ -69,4 +69,6 @@ npm link @project-sunbird/sb-dashlet
 | V13_Migration     |      5.1.3          |     Ng V13      |
 | V14_Migration     |      6.0.5          |     Ng V14      |
 | 8.0.0_v15         |      8.0.0          |     Ng V15      |
+| 8.0.0_v16         |      8.0.0          |     Ng V15      |
+
 

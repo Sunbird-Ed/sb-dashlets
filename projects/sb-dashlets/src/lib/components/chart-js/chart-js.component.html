@@ -14,7 +14,7 @@
 
 <div *ngIf="$context?.inputParameters as data">
   <canvas [id]="id" baseChart [width]="data.options.width ? data.options.width : '400'" [height]="data.options.height ? data.options.height : '400'" [datasets]="data?.datasets" [labels]="data?.labels"
-    [options]="data?.options" [colors]="data?.colors" [legend]="data?.legend" [chartType]="data?.type" [plugins]="barChartPlugins"
+    [options]="data?.options" [data]="chartColorData" [legend]="data?.legend" [type]="data?.type" [plugins]="barChartPlugins"
     (chartClick)="onChartClicked($event)" (chartHover)="onChartHovered($event)"></canvas>
 </div>
 

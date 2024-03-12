@@ -7,6 +7,7 @@ import { get, groupBy, mapValues, sumBy, remove } from 'lodash-es';
 import { DEFAULT_CONFIG, DASHLET_CONSTANTS, DATA_SERVICE } from '../../tokens/index';
 import { CHART_DEFAULT_CONFIG } from './defaultConfiguration'
 import * as pluginAnnotation from 'chartjs-plugin-annotation';
+import { ChartData } from 'chart.js';
 
 /**
  * @dynamic
@@ -35,6 +36,7 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   public _labelsAndDatasetsClosure: any;
   public exportOptions = ['png', 'csv', 'jpg'];
   public barChartPlugins = [pluginAnnotation];
+  public chartColorData: ChartData<any>;
   
   constructor(@Inject(DATA_SERVICE) protected dataService: IDataService, @Inject(DEFAULT_CONFIG) defaultConfig: object, @Inject(DASHLET_CONSTANTS) private CONSTANTS: StringObject) {
     super(dataService);
@@ -127,6 +129,13 @@ export class ChartJsComponent extends BaseComponent implements IChart, OnDestroy
   private setChartData(config: Partial<IChartOptions> = {}) {
     this.inputParameters = { ...this._defaultConfig, ...this.inputParameters, ...config };
     this.$context = { data: this.data, config: this.config, inputParameters: this.inputParameters, exportOptions: this.exportOptions };
+    this.chartColorData = {
+      datasets: [
+        {
+          backgroundColor: this.inputParameters?.colors,
+        }
+      ]
+    }
   }
 
   reset(): void {

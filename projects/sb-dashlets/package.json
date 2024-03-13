@@ -9,14 +9,14 @@
   "license": "MIT",
   "description": "A Simple extensible angular library to render JSON data into different chart formats",
   "peerDependencies": {
-    "@angular/common": "16.2.12",
-    "@angular/core": "16.2.12",
+    "@angular/common": "16.2.0",
+    "@angular/core": "16.2.0",
     "rxjs": "6.6.7"
   },
   "dependencies": {
-    "chart.js": "2.9.4",
+    "chart.js": "3.4.0",
     "chartjs-plugin-annotation": "^0.5.7",
-    "ng2-charts": "2.4.2",
+    "ng2-charts": "3.0.8",
     "lodash-es": "4.17.21",
     "angular-datatables": "15.0.1",
     "datatables.net": "1.10.20",

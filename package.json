@@ -21,7 +21,7 @@
     "@angular/router": "16.2.12",
     "@project-sunbird/sb-styles": "0.0.7",
     "angular-datatables": "15.0.1",
-    "chart.js": "4.4.2",
+    "chart.js": "3.4.0",
     "chartjs-plugin-annotation": "^0.5.7",
     "datatables.net": "1.10.20",
     "datatables.net-buttons": "1.7.0",
@@ -41,7 +41,7 @@
     "zone.js": "0.13.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "15.2.0",
+    "@angular-devkit/build-angular": "16.2.12",
     "@angular/cli": "16.0.0",
     "@angular/compiler-cli": "16.2.12",
     "@angular/language-service": "16.2.12",

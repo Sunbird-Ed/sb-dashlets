@@ -71,4 +71,34 @@ npm link @project-sunbird/sb-dashlet
 | 8.0.0_v15         |      8.0.0          |     Ng V15      |
 | 8.0.0_v16         |      8.0.2          |     Ng V16      |
 
+#### Code Quality
 
+The project maintains code quality through automated checks that run on every pull request:
+
+1. **Linting**
+   - Runs ESLint to check code style and quality
+   - Command: `yarn lint`
+
+2. **Dependencies**
+   - Uses `yarn install` for deterministic installations
+   - GitHub Actions cache for faster builds
+
+3. **Testing**
+   - Unit tests using Karma
+   - Command: `yarn test`
+
+These checks ensure consistent code style and secure dependency management.
+
+## Package Publishing
+
+Workflow automatically builds and publishes NPM packages whenever a new tag is pushed to the repository.
+
+### Publish Workflow
+
+The workflow is triggered on:
+- Triggered on push events for any Git tag
+
+Key features of the workflow:
+1. Automatically builds the project
+2. Creates NPM package
+3. Publishes to NPM registry using NPM authentication token (must be provided as GitHub secret `NPM_TOKEN`)

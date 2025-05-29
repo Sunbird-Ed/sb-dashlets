@@ -1,0 +1,45 @@
+name: Code Quality Checks
+
+on:
+  pull_request:
+    branches:
+        - '**'
+
+jobs:
+  code-quality:
+    name: Run Code Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '18.19.0'
+    
+        - name: Restore node_modules cache
+          id: cache
+          uses: actions/cache@v4
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-node-modules-
+
+        - name: Install dependencies
+          run: yarn install
+        
+        - name: Save node_modules cache
+          if: steps.cache.outputs.cache-hit != 'true'
+          uses: actions/cache@v4
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+        
+        - name: Run lint
+          run: yarn lint
+      
+        - name: Run tests
+          run: yarn test

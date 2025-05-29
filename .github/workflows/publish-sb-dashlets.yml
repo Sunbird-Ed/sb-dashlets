@@ -42,5 +42,5 @@ jobs:
         run: |
           npm run build-lib
           npm pack ./dist/sb-dashlets
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
           npm publish ./dist/sb-dashlets
